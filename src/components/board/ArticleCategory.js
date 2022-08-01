@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import {useSelector} from 'react-redux'
 import { useNavigate } from 'react-router'
-
+import './ArticleCategory.css'
 
 function ArticleCategory(props){
     let state = useSelector((state)=>{return state})
     
     return(
-        <>
+        <div className='category'>
             <ul style={{position:"relative",top:"134px",paddingLeft:"44px",margin:"0px"}}>
             {
                 state.articleCategory.map((a,i)=>{
@@ -17,7 +17,7 @@ function ArticleCategory(props){
                 })
             }
             </ul>
-        </>
+        </div>
     )
 }
 

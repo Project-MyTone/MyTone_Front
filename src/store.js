@@ -9,11 +9,11 @@ let articleCategory = createSlice({
 let article = createSlice({
     name : 'article',
     initialState : [
-        {id:0, title:'7월17일', content:'게시글1',img:'', board:'0',user:'kim'}, 
-        {id:1, title:'9월24일', content:'게시글2',img:'',board:'1',user:'song'},
-        {id:2, title:'5월25일', content:'게시글3',img:'', board:'1',user:'lee'},
-        {id:3, title:'11월11일', content:'게시글4',img:'', board:'0',user:'bae'},
-        {id:4, title:'12월25일', content:'게시글5',img:'', board:'1',user:'park'},
+        {id:0, title:'7월17일', content:'게시글1',img:'', board:'0',user:'kim',create_at:'2022-08-01'}, 
+        {id:1, title:'9월24일', content:'게시글2',img:'',board:'1',user:'song',create_at:'2022-07-01'},
+        {id:2, title:'5월25일', content:'게시글3',img:'', board:'1',user:'lee',create_at:'2022-06-25'},
+        {id:3, title:'11월11일', content:'게시글4',img:'', board:'0',user:'bae',create_at:'2022-05-14'},
+        {id:4, title:'12월25일', content:'게시글5',img:'', board:'1',user:'park',create_at:'2022-01-01'},
     ],
     reducers :{
         addArticle(state,action){
