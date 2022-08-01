@@ -1,15 +1,15 @@
 import {useSelector} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import {editBoard} from './../../store.js'
+import {editArticle} from '../../store.js'
 import {useEffect, useState} from 'react'
 
-function EditBoard(){
+function ArticleEdit(){
     let navigate = useNavigate();
     let state = useSelector((state)=>{return state})
     let dispatch=useDispatch();
     let {id} = useParams();
-    let findedBoard = state.board.find((e)=>e.id==id)
+    let findedBoard = state.article.find((e)=>e.id==id)
     let [title,setTitle] = useState('');
     let [content,setContent] = useState('');
 
@@ -29,10 +29,10 @@ function EditBoard(){
                 <textarea name="content" style={{minHeight:"300px",minWidth:"500px"}} value={content} onChange={(e)=>{setContent(e.target.value)}}></textarea>
             </div>
           
-            <button onClick={()=>{dispatch(editBoard({id:id, title:title, content:content})); alert('수정완료'); navigate('/') } }>수정완료</button>
+            <button onClick={()=>{dispatch(editArticle({id:id, title:title, content:content})); alert('수정완료'); navigate('/board') } }>수정완료</button>
             
         </div>
     )
 }
 
-export default EditBoard
+export default ArticleEdit

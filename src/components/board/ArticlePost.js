@@ -1,9 +1,9 @@
 import {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router';
-import {addBoard} from './../../store.js'
+import {addArticle} from '../../store.js'
 
-function BoardPost(){
+function ArticlePost(){
     let [title,setTitle] = useState('');
     let [content,setContent] = useState('');
     let [board,setBoard] = useState({title:'',content:''});
@@ -23,11 +23,11 @@ function BoardPost(){
                 tmp.title=title;
                 tmp.content=content;
                 setBoard(tmp);
-                dispatch(addBoard(board))
+                dispatch(addArticle(board))
                 alert('작성완료')
-                navigate('/')
+                navigate('/board')
             }}>작성완료</button>
         </div>
     )
 }
-export default BoardPost
+export default ArticlePost
