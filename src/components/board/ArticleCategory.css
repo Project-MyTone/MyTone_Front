@@ -1,5 +1,8 @@
 .category{
     width: 15%;
     background-color: #E2E2E2;
-    height: 100vh;
+    min-height: 100vh;
+}
+.category li{
+    cursor:pointer;
 }

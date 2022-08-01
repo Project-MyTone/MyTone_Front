@@ -10,7 +10,7 @@ import ArticleCategory from './ArticleCategory.js'
 function BoardMain(){
     let [category,setCategory] =  useState(-1);
     return(
-        <div style={{display:'flex'}}>
+        <div style={{display:'flex', height:'100%'}}>
             <ArticleCategory setCategory={setCategory}></ArticleCategory>
             <Article category={category}></Article>
         </div>
