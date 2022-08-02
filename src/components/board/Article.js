@@ -15,7 +15,7 @@ function Article(props) {
         findedState=state.article.filter((e)=>e.board==props.category);
     }
     return (
-        <div style={{padding:"50px 200px 50px 150px",width:"85%"}}>
+        <div style={{padding:"50px 200px 50px 150px"}}>
             {
                 findedState.map((a, i) => {
                     return (

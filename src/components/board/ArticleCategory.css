@@ -1,8 +1,41 @@
-.category{
-    width: 15%;
-    background-color: #E2E2E2;
-    min-height: 100vh;
+.category-list{
+    margin-bottom : 20px;
+    display: inline-block;
+    cursor : pointer;
 }
-.category li{
-    cursor:pointer;
+
+.openButton-container{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.openButton{
+    overflow: hidden;
+    display: inline-block;
+    width: 22px;
+    height: 49px;
+    font-size: 0;
+    color: transparent;
+    vertical-align: top;
+    border:none;
+    background-image:url("./../../img/folding-button1.png")
+}
+.closeButton-container{
+    position: absolute;
+    top: 50%;
+    left:100%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.closeButton{
+    overflow: hidden;
+    display: inline-block;
+    width: 22px;
+    height: 49px;
+    font-size: 0;
+    color: transparent;
+    vertical-align: top;
+    border:none;
+    background-image:url("./../../img/folding-button2.png")
 }
