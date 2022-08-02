@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router'
 import { Button, Offcanvas } from 'react-bootstrap'
 import './ArticleCategory.css'
 
+
 function ArticleCategory(props) {
     let state = useSelector((state) => { return state })
     let [show, setShow] = useState(true)
+    let navigate = useNavigate()
     const handleClose = () => setShow(false);
     const toggleShow = () => setShow((s) => !s);
 
@@ -19,11 +21,11 @@ function ArticleCategory(props) {
                 </Offcanvas.Header>
                 
                 <Offcanvas.Body className='category-top'>
-                    <div className="category-list" onClick={() => { props.setCategory(-1)}}>every</div>
+                    <div className="category-list" onClick={() => { props.setCategory(-1); } } >every</div>
                     {
                         state.articleCategory.map((a, i) => {
                             return (
-                                <div className="category-list" onClick={() => { props.setCategory(a.id) }} key={i}>{a.name}</div>
+                                <div className="category-list" onClick={() => { props.setCategory(a.id);}} key={i}>{a.name}</div>
                             )
                         })
                     }

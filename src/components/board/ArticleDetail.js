@@ -5,7 +5,8 @@ import { deleteArticle } from '../../store.js'
 import {useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
 import './ArticleDetail.css'
-
+import Comment from './../comment/Comment'
+import ArticleCategory from './ArticleCategory.js'
 
 function ArticleDetail(){
     let navigate = useNavigate();
@@ -26,9 +27,11 @@ function ArticleDetail(){
    },[])
     
     return(
+        <>
+        <ArticleCategory></ArticleCategory>
         <div className='detail-top'>
             <div className='detail-header'>
-                <div>제목 : {title}</div>
+                <div style={{fontWeight:'bold'}}>{title}</div>
                 <div className="header-detail">
                     <div>작성일자 : {createAt}</div>
                     <div>{user}</div>
@@ -47,7 +50,9 @@ function ArticleDetail(){
             </div>
             <hr></hr>
             <h4>댓글</h4>
+            <Comment></Comment>
         </div>
+        </>
     )
 }
 
