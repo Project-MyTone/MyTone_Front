@@ -29,13 +29,15 @@ function ArticleCategory(props) {
                     <Offcanvas.Title>카테고리</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+                    <div className="category-list" onClick={() => { props.setCategory(-1) }}>every</div>
                     {
                         state.articleCategory.map((a, i) => {
                             return (
-                                <div className="category-list"onClick={() => { props.setCategory(a.id) }} style={{  }} key={i}>{a.name}</div>
+                                <div className="category-list" onClick={() => { props.setCategory(a.id) }} key={i}>{a.name}</div>
                             )
                         })
                     }
+                
                 </Offcanvas.Body>
                 <div className="closeButton-container">
                     <button className="closeButton" onClick={toggleShow}>
