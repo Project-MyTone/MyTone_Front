@@ -1,0 +1,32 @@
+.article-top{
+    width: 100vw;
+    padding: 5vh 20vw 5vh 20vw;
+    min-width:545px;
+}
+.article-contents{
+    position: relative;
+    min-height: 140px;
+    border-bottom: 1px solid #E2E2E2;
+    margin-bottom:35px;
+    
+    
+}
+
+.article-header{
+    display:flex;
+    justify-content: space-between;
+    padding-bottom: 18px;
+}
+.article-header > div{
+    display: flex;
+    width:250px;
+    justify-content: space-around;
+}
+.article-body{
+    padding-bottom: 15px;
+    opacity: 0.6;
+    cursor:pointer;
+}
+.article-body:hover{
+    opacity: 1;
+}

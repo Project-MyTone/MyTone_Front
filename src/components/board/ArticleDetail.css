@@ -1,0 +1,31 @@
+.detail-top{
+    width: 100vw;
+    padding: 17vh 20vw 5vh 20vw;
+    min-width: 852px;
+}
+.detail-header{
+    display: flex;
+    justify-content: space-between;
+}
+.header-detail{
+    display: flex;
+    justify-content: space-around;
+    width:250px;
+}
+.button-container{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+.button-container Button{
+    width: 60px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    
+}
+.img-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
