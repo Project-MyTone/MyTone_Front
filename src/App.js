@@ -1,3 +1,4 @@
+import {react, useState} from 'react'
 import {Route,Routes,Link} from 'react-router-dom'
 import ArticlePost from './components/board/ArticlePost.js'
 import ArticleEdit from './components/board/ArticleEdit.js'
@@ -8,13 +9,15 @@ import Header from './Layout/Header'
 import Footer from './Layout/Footer'
 
 function App() {
+  let [category,setCategory] =  useState(-1);
+
   return (
     <div className="App">
       <Header></Header>
       <Routes>
         <Route path="/" element={<Main/>}></Route>
-        <Route path="/board" element={<BoardMain></BoardMain>}></Route>
-        <Route path="/detail/:id" element={<ArticleDetail></ArticleDetail>}></Route>
+        <Route path="/board" element={<BoardMain category={category} setCategory={setCategory} ></BoardMain>}></Route>
+        <Route path="/detail/:id" element={<ArticleDetail setCategory={setCategory}></ArticleDetail>}></Route>
         <Route path="/post" element={<ArticlePost></ArticlePost>}></Route>
         <Route path="/edit/:id" element={<ArticleEdit></ArticleEdit>}></Route>
       </Routes>
