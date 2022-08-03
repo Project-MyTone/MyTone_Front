@@ -7,12 +7,12 @@ import Article from './Article.js'
 import ArticleCategory from './ArticleCategory.js'
 
 
-function BoardMain(){
-    let [category,setCategory] =  useState(-1);
+function BoardMain(props){
+    
     return(
         <div>
-            <ArticleCategory setCategory={setCategory}></ArticleCategory>
-            <Article category={category}></Article>
+            <ArticleCategory setCategory={props.setCategory}></ArticleCategory>
+            <Article category={props.category}></Article>
         </div>
     )
 }

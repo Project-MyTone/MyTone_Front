@@ -7,8 +7,8 @@ import {Button} from 'react-bootstrap'
 import './ArticleDetail.css'
 import Comment from './../comment/Comment'
 import ArticleCategory from './ArticleCategory.js'
-
-function ArticleDetail(){
+import tmp_img from './../../img/tmp_img.png'
+function ArticleDetail(props){
     let navigate = useNavigate();
     let state = useSelector((state)=>{return state})
     let dispatch=useDispatch();
@@ -28,7 +28,7 @@ function ArticleDetail(){
     
     return(
         <>
-        <ArticleCategory></ArticleCategory>
+        <ArticleCategory setCategory={props.setCategory}></ArticleCategory>
         <div className='detail-top'>
             <div className='detail-header'>
                 <div style={{fontWeight:'bold'}}>{title}</div>
@@ -44,7 +44,7 @@ function ArticleDetail(){
             </div>
             <div>
                 <div className='img-container'>
-                    <img src={findedBoard.img}></img>
+                    <img src={tmp_img}></img>
                 </div>
                 <div style={{minHeight:"150px"}}>{content}</div>
             </div>

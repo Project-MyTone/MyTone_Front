@@ -12,20 +12,31 @@ function ArticleCategory(props) {
     const handleClose = () => setShow(false);
     const toggleShow = () => setShow((s) => !s);
 
+    console.log('랜더링')
 
+    useEffect(()=>{
+        let current_toggleState = localStorage.getItem('toggle');
+        setShow(current_toggleState=='1'?true:false)
+    },[])
+    
+    useEffect(()=>{
+        
+        localStorage.setItem('toggle',show==true?'1':'0')
+        
+    },[show])
     return (
         <div>
-            <Offcanvas style={{width:'15vw'}}show={show} onHide={handleClose} scroll={true} backdrop={false}>
+            <Offcanvas style={{width:'15vw'}} show={show} onHide={handleClose} scroll={true} backdrop={false}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>카테고리</Offcanvas.Title>
                 </Offcanvas.Header>
                 
                 <Offcanvas.Body className='category-top'>
-                    <div className="category-list" onClick={() => { props.setCategory(-1); } } >every</div>
+                    <div className="category-list" onClick={() => { props.setCategory(-1); navigate('/board')} } >every</div>
                     {
                         state.articleCategory.map((a, i) => {
                             return (
-                                <div className="category-list" onClick={() => { props.setCategory(a.id);}} key={i}>{a.name}</div>
+                                <div className="category-list" onClick={() => { props.setCategory(a.id); navigate('/board')}} key={i}>{a.name}</div>
                             )
                         })
                     }

@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router';
 import { addArticle } from '../../store.js'
-import {Dropdown} from 'react-bootstrap'
-
+import {Dropdown,Button} from 'react-bootstrap'
+import './ArticlePost.css'
 function ArticlePost() {
     let [title, setTitle] = useState('');
     let [content, setContent] = useState('');
@@ -14,26 +14,29 @@ function ArticlePost() {
     
     
     return (
-        <div style={{ textAlign: 'center' }}>
-            <Dropdown>
-                <Dropdown.Toggle variant="secondary" id='dropdown-variants-Secondary'>
-                    {category=='0'?'Cool':'Warm'}
-                </Dropdown.Toggle>
+        <div className='post-top'>
+            <div className="post-header">
+                <div>
+                    <input type="text" name="title" onChange={(e) => { setTitle(e.target.value) }} />
+                </div>
 
-                <Dropdown.Menu>
-                    <Dropdown.Item onClick={()=>{setCategory('0')}}>Cool</Dropdown.Item>
-                    <Dropdown.Item onClick={()=>{setCategory('1')}}>Warm</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-            <div>
-                <input type="text" name="title" onChange={(e) => { setTitle(e.target.value) }} />
+                <Dropdown>
+                    <Dropdown.Toggle variant="secondary" id='dropdown-variants-Secondary'>
+                        {category=='0'?'Cool':'Warm'}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={()=>{setCategory('0')}}>Cool</Dropdown.Item>
+                        <Dropdown.Item onClick={()=>{setCategory('1')}}>Warm</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
             <br></br>
-            <div>
-                <textarea name="content" style={{ minHeight: "300px", minWidth: "500px" }} onChange={(e) => { setContent(e.target.value) }}></textarea>
+            <div style={{width:'100%', height:'100%',marginBottom:'15px'}}>
+                <textarea style={{width:'100%', height:'100%'}} name="content" onChange={(e) => { setContent(e.target.value) }}></textarea>
             </div>
             
-            <button onClick={() => {
+            <Button variant="light" onClick={() => {
                 const date = new Date();
                 const year = date.getFullYear();
                 const month = ('0' + (date.getMonth() + 1)).slice(-2);
@@ -49,7 +52,7 @@ function ArticlePost() {
                 dispatch(addArticle(board))
                 alert('작성완료')
                 navigate('/board')
-            }}>작성완료</button>
+            }}>작성완료</Button>
         </div>
     )
 }
