@@ -1,0 +1,24 @@
+.post-top{
+    width: 42vw;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin:0 auto;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+.post-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.post-header div:first-child{
+    width:70%;
+}
+.post-header > div > input{
+   width: 100%;
+   height: 100%;
+}
