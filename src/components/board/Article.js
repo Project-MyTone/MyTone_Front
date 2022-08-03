@@ -16,7 +16,7 @@ function Article(props) {
     }
     else {
         findedState = state.article.filter((e) => e.board == props.category);
-        console.log(findedState)
+        //console.log(findedState)
     }
 
 
@@ -34,7 +34,7 @@ function Article(props) {
             {
                 findedState.length == 0
                     ?
-                    <div>게시글이 없습니다 ㅜㅜ</div>
+                    <div style={{height:'130px'}}>게시글이 없습니다 ㅜㅜ</div>
                     :
                     <div>
                         {

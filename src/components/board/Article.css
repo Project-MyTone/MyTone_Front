@@ -2,6 +2,7 @@
     width: 100vw;
     padding: 5vh 20vw 5vh 20vw;
     min-width:545px;
+    min-height: 500px;
 }
 .article-contents{
     position: relative;
