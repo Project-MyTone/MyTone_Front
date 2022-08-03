@@ -7,6 +7,7 @@ import ArticleDetail from './components/board/ArticleDetail'
 import Main from './Main/Main'
 import Header from './Layout/Header'
 import Footer from './Layout/Footer'
+import SignUp from './components/user/SignUp'
 
 function App() {
   let [category,setCategory] =  useState(-1);
@@ -16,6 +17,7 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path="/" element={<Main/>}></Route>
+        <Route path="/signup" element={<SignUp></SignUp>}></Route>
         <Route path="/board" element={<BoardMain category={category} setCategory={setCategory} ></BoardMain>}></Route>
         <Route path="/detail/:id" element={<ArticleDetail setCategory={setCategory}></ArticleDetail>}></Route>
         <Route path="/post" element={<ArticlePost></ArticlePost>}></Route>
