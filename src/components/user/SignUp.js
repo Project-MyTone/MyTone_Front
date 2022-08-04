@@ -28,16 +28,16 @@ function SignUp() {
                         gender: e.target.gender.value
                     }).then((res) => {
                         if (res.status === 201) { // 가입 성공
-                            alert(res.message);
+                            alert(res.data.message);
                         } else { // 가입 실패
                             alert('가입 실패!!');
                         }
                     }).catch((err) => {
                         console.log(err);
                     })
-                }}
-            >
-                <table style={{margin:'0 auto'}}>
+                }}>
+                <table style={{margin:'0 auto',position:'relative'}}>
+                    
                     <tr>
                         <td>아이디:</td>
                         <td>
@@ -57,7 +57,7 @@ function SignUp() {
                         </td>
                     </tr>
                     {
-                        passwordModal == true ? <div className="alert alert-warning">일치하는 비밀번호를 입력해주세요</div> : null
+                        passwordModal == true ? <div style={{position:'absolute',right:'-299px',top:'83px'}}className="alert alert-warning">일치하는 비밀번호를 입력해주세요</div> : null
                     }
 
                     <tr>
@@ -68,9 +68,9 @@ function SignUp() {
                     </tr>
                     <tr>
                         <td>성별</td>
-                        <td>
-                            <input type='radio' name='gender' value='female' />여성
-                            <input type='radio' name='gender' value='male' />남성
+                        <td style={{display:'flex',justifyContent:'space-evenly'}}>
+                            <div><input type='radio' name='gender' value='female' />여성</div>
+                            <div><input type='radio' name='gender' value='male' />남성</div>
                         </td>
                     </tr>
                     
