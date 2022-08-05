@@ -8,7 +8,9 @@ function Main() {
             <div>
                 <img src={MainImg} className="MainImg"/>
                 <div className="MainText">Personal Color Test</div>
-                <Button className="TestBtn" style={{backgroundColor: "#CD5C5C", border:"none"}}>GO TEST</Button>
+                <Button className="TestBtn" style={{backgroundColor: "#CD5C5C", border:"none"}}
+                    onClick={()=>{navigate('/ImgUpload')}}
+                >GO TEST</Button>
             </div>
             <div className="SupportInfoBG">
                 <div className="SupportInfoTop">
