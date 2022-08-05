@@ -14,8 +14,8 @@ function Header() {
             <Navbar bg="light" variant="light">
                 <Container>
                 <Nav className="me-auto">
-                    <Nav.Link href="#home">홈</Nav.Link>
-                    <Nav.Link href="#features">테스트</Nav.Link>
+                    <Nav.Link href='/'>홈</Nav.Link>
+                    <Nav.Link href='/ImgUpload'>테스트</Nav.Link>
                     <Nav.Link href="#pricing">게시판</Nav.Link>
                 </Nav>
                 </Container>
