@@ -1,5 +1,5 @@
 import {react, useState} from 'react'
-import {Route,Routes,Link} from 'react-router-dom'
+import {Route,Routes,Link,useLocation} from 'react-router-dom'
 import ArticlePost from './components/board/ArticlePost.js'
 import ArticleEdit from './components/board/ArticleEdit.js'
 import BoardMain from './components/board/BoardMain'
@@ -12,6 +12,7 @@ import SignIn from './components/user/SignIn'
 
 function App() {
   let [category,setCategory] =  useState(-1);
+  
 
   return (
     <div className="App">
