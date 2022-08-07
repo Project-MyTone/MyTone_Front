@@ -29,7 +29,21 @@ function Article(props) {
     }
     return (
         <div className='article-top'>
-            <h2 style={{ marginBottom: '100px' }}>{props.category == -1 ? 'every' : props.category == 0 ? 'cool' : 'warm'}</h2>
+            <h2 style={{ marginBottom: '100px' }}>
+                {
+                    props.category == -1 
+                    ? 'every' 
+                    : props.category == 0 
+                    ? 'spring-warm' 
+                    :  props.category == 1
+                    ? 'summer-cool' 
+                    :  props.category == 2
+                    ? 'fall-warm' 
+                    :  props.category == 3
+                    ? 'winter-cool' 
+                    : ''
+                }
+            </h2>
 
             {
                 findedState.length == 0
