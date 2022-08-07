@@ -28,7 +28,7 @@ function App() {
         <Route path="/post" element={<ArticlePost></ArticlePost>}></Route>
         <Route path="/edit/:id" element={<ArticleEdit></ArticleEdit>}></Route>
         <Route path="/ImgUpload" element={<ImgUpload></ImgUpload>}></Route>
-        <Route path="/Result/:PersonalColor" element={<Result></Result>}>
+        <Route path="/Result/:PersonalColor" element={<Result></Result>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
