@@ -49,13 +49,36 @@ let article = createSlice({
     }
 })
 
+// access_token 
+let token = createSlice({
+    name: 'token',
+    initialState:{
+        authenticated:false,
+        accessToken:null,
+        expireTime:null
+    },
+    reducers:{
+        setAuthToken(state,action){
+            state.authenticated=true;
+            state.accessToken=action.payload;
+            state.expireTime= new Date().getTime() + 600*1000; //1 minutes
+        },
+        deleteAuthToken(state,action){
+            state.authenticated=false;
+            state.accessToken=null;
+            state.expireTime=null;
+        }
+    }
+})
+
 
 export let {addArticle,editArticle,deleteArticle} = article.actions
+export let {setAuthToken, deleteAuthToken} = token.actions
 
 export default configureStore({
     reducer: {
         articleCategory : articleCategory.reducer,
-        article : article.reducer
-        
+        article : article.reducer,
+        token : token.reducer
     }
 })
