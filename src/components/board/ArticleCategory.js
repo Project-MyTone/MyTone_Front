@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { Button, Offcanvas } from 'react-bootstrap'
+import { Outlet } from 'react-router';
 import './ArticleCategory.css'
 
 
@@ -26,17 +27,17 @@ function ArticleCategory(props) {
     },[show])
     return (
         <div>
-            <Offcanvas style={{width:'15vw'}} show={show} onHide={handleClose} scroll={true} backdrop={false}>
+            <Offcanvas style={{width:'15vw',minWidth:'fit-content'}} show={show} onHide={handleClose} scroll={true} backdrop={false}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>카테고리</Offcanvas.Title>
                 </Offcanvas.Header>
                 
                 <Offcanvas.Body className='category-top'>
-                    <div className="category-list" onClick={() => { props.setCategory(-1); navigate('/board')} } >every</div>
+                    <div className="category-list" onClick={() => { props.setCategory(-1); navigate('/board/list')} } >every</div>
                     {
                         state.articleCategory.map((a, i) => {
                             return (
-                                <div className="category-list" onClick={() => { props.setCategory(a.id); navigate('/board')}} key={i}>{a.name}</div>
+                                <div className="category-list" onClick={() => { props.setCategory(a.id); navigate('/board/list')}} key={i}>{a.name}</div>
                             )
                         })
                     }
@@ -52,7 +53,7 @@ function ArticleCategory(props) {
                 <button className="openButton" onClick={toggleShow}>      
                 </button>
             </div>
-            
+            <Outlet></Outlet>
         </div>
     )
 }
