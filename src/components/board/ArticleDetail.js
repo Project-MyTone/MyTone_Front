@@ -6,7 +6,6 @@ import {useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
 import './ArticleDetail.css'
 import Comment from './../comment/Comment'
-import ArticleCategory from './ArticleCategory.js'
 import tmp_img from './../../img/tmp_img.png'
 function ArticleDetail(props){
     let navigate = useNavigate();
@@ -28,7 +27,7 @@ function ArticleDetail(props){
     
     return(
         <>
-        <ArticleCategory setCategory={props.setCategory}></ArticleCategory>
+        
         <div className='detail-top'>
             <div className='detail-header'>
                 <div style={{fontWeight:'bold'}}>{title}</div>
@@ -40,7 +39,7 @@ function ArticleDetail(props){
             <hr></hr>
             <div className='button-container'>
                 <Button variant="light" onClick={() => { navigate('/edit/' + findedBoard.id) }}>수정</Button>
-                <Button variant="danger" onClick={() => { dispatch(deleteArticle(findedBoard.id)); alert('삭제되었습니다'); navigate('/board')}}>삭제</Button>
+                <Button variant="danger" onClick={() => { dispatch(deleteArticle(findedBoard.id)); alert('삭제되었습니다'); navigate('/board/list')}}>삭제</Button>
             </div>
             <div>
                 <div className='img-container'>
