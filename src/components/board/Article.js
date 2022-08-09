@@ -63,7 +63,7 @@ function Article(props) {
                                             </div>
                                         </div>
 
-                                        <div className='article-body' onClick={() => { navigate('/detail/' + a.id) }} >{previewContent(a.content)}</div>
+                                        <div className='article-body' onClick={() => { navigate('/board/detail/' + a.id) }} >{previewContent(a.content)}</div>
                                         
 
                                     </div>
