@@ -8,7 +8,7 @@ import { logoutUser } from '../../api/url';
 import { getCookieToken,removeCookieToken } from '../../cookie/Cookie';
 import { deleteToken } from '../../store';
 
-function Logout(){
+function SignOut(){
     const {accessToken} = useSelector(state=>state.token);
 
     const dispatch = useDispatch();
@@ -37,3 +37,5 @@ function Logout(){
         </>
     )
 }
+
+export default SignOut
