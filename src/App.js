@@ -17,8 +17,8 @@ import PrivateRoute from './routes/PrivateRoute.js'
 import axios from "axios"
 
 function App() {
-  let [category, setCategory] = useState(-1);
-  
+  let [category, setCategory] = useState(-1); // -1:all, 0:spring-warm, 1:summer-cool, 2:fall-warm, 3:winter-cool 
+                                
  
   return (
     <div className="App">
@@ -29,12 +29,13 @@ function App() {
           <Route path="/" element={<Main />}></Route>
           <Route path="/signup" element={<SignUp></SignUp>}></Route>
           <Route path="/signin" element={<SignIn></SignIn>}></Route>
-          <Route path="/board" element={<ArticleCategory category={category} setCategory={setCategory} ></ArticleCategory>}>
-            <Route path="list" element={<Article category={category}></Article>}></Route>
-            <Route path="detail/:id" element={<ArticleDetail setCategory={setCategory}></ArticleDetail>}></Route>
+          
+          <Route path="/board" element={<ArticleCategory category={category} setCategory={setCategory} />}> {/*nested route 사용*/}
+            <Route path="list" element={<Article category={category}/>}></Route>  {/*/board/list로 접속하면 카테고리와 게시판 목록을 보여줌*/}
+            <Route path="detail/:id" element={<ArticleDetail setCategory={setCategory}/>}></Route> {/*/board/detail/:id로 접속하면 카테고리와 상세 게시판을 보여줌*/}
           </Route>
           
-          {/* <Route element={<PrivateRoute></PrivateRoute>}> */}
+          {/* <Route element={<PrivateRoute></PrivateRoute>}> */} {/*로그인이 된 경우만 접근할 수 있는 Route*/}
             <Route path="/post" element={<ArticlePost></ArticlePost>}></Route>
             <Route path="/edit/:id" element={<ArticleEdit></ArticleEdit>}></Route>
             <Route path="/image" element={<ImgUpload></ImgUpload>}></Route>
