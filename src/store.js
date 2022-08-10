@@ -1,4 +1,11 @@
 import {configureStore,createSlice} from "@reduxjs/toolkit";
+import axios from "axios"
+
+
+    // axios.get('/board')
+    // .then((res)=>{console.log(res.data)})
+    // .catch((err)=>{console.log(err)})
+
 
 
 let articleCategory = createSlice({
