@@ -4,29 +4,31 @@ import { Button } from 'react-bootstrap'
 import { useState } from 'react'
 import { deleteArticle } from '../../store.js'
 import './Article.css'
+
 function Article(props) {
-    let state = useSelector((state) => { return state })
+    let state = useSelector((state) => { return state }) //redux에서 state 가져오기
     let navigate = useNavigate()
     let dispatch = useDispatch();
-    let findedState;
+    let findedState; //선택한 카테고리에 따라 게시판이 저장될 변수
     
 
-    if (props.category == -1) {
+    if (props.category == -1) { // category가 every(-1)인 경우 
         findedState = state.article;
     }
     else {
-        findedState = state.article.filter((e) => e.board == props.category);
+        findedState = state.article.filter((e) => e.board == props.category); //redux의 article 에서 선택된 category 찾음
         //console.log(findedState)
     }
 
 
-    function previewContent(e){
+    function previewContent(e){ // 게시글 내용이 180자 넘어가면 ...으로 표시
         if (e.length > 180){    
             let tmp_content = e.substr(0,180) + '...';
             return tmp_content
         }
         return e
     }
+
     return (
         <div className='article-top'>
             <h2 style={{ marginBottom: '100px' }}>
@@ -63,9 +65,9 @@ function Article(props) {
                                             </div>
                                         </div>
 
-                                        <div className='article-body' onClick={() => { navigate('/board/detail/' + a.id) }} >{previewContent(a.content)}</div>
-                                        
-
+                                        <div className='article-body' onClick={() => { navigate('/board/detail/' + a.id) }} >
+                                            {previewContent(a.content)}
+                                        </div>
                                     </div>
                                 )
                             })
@@ -74,15 +76,11 @@ function Article(props) {
 
                     </div>
             }
-
-
-            <Button style={{ display: 'inherit', margin: '0 auto' }} onClick={() => { navigate("/post") }} variant="light">글쓰기</Button>
+            <Button style={{ display: 'inherit', margin: '0 auto' }} onClick={() => { navigate("/post") }} variant="light">
+                글쓰기
+            </Button>
         </div>
     )
 }
-
-
-
-
 
 export default Article

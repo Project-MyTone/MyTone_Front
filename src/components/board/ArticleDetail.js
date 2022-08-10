@@ -5,9 +5,9 @@ import { deleteArticle } from '../../store.js'
 import {useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
 import './ArticleDetail.css'
-import Comment from './../comment/Comment'
 import tmp_img from './../../img/tmp_img.png'
-function ArticleDetail(props){
+
+function ArticleDetail(props){ //게시판 상세 페이지
     let navigate = useNavigate();
     let state = useSelector((state)=>{return state})
     let dispatch=useDispatch();
@@ -49,7 +49,7 @@ function ArticleDetail(props){
             </div>
             <hr></hr>
             <h4>댓글</h4>
-            <Comment></Comment>
+            
         </div>
         </>
     )
