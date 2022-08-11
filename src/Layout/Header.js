@@ -1,13 +1,15 @@
 import './Header.css';
 import {Container, Nav, Navbar, Button, ButtonGroup } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
 
 function Header() {
+    let navigate = useNavigate();
     return(
         <>
             <div className="Title">
                 <div className="ProjectName" style={{display:"inline"}}>myTone</div>
                 <ButtonGroup className="LogMenu" size="sm">
-                    <Button className="SignIn" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN IN</Button>
+                    <Button href='/signin'className="SignIn" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN IN</Button>
                     <Button className="SignUp" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN UP</Button>
                 </ButtonGroup>
             </div>
@@ -16,7 +18,7 @@ function Header() {
                 <Nav className="me-auto">
                     <Nav.Link href='/'>홈</Nav.Link>
                     <Nav.Link href='/image'>테스트</Nav.Link>
-                    <Nav.Link href="#pricing">게시판</Nav.Link>
+                    <Nav.Link onClick={()=>{navigate('/board/list')}}>게시판</Nav.Link>
                 </Nav>
                 </Container>
             </Navbar>
