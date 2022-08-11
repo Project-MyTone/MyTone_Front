@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { Button } from 'react-bootstrap'
-import { useState } from 'react'
-import { deleteArticle } from '../../store.js'
+import { useEffect, useState } from 'react'
+import { addArticle,deleteArticle } from '../../store.js'
+import axios from 'axios'
 import './Article.css'
 
 function Article(props) {
@@ -10,7 +11,15 @@ function Article(props) {
     let navigate = useNavigate()
     let dispatch = useDispatch();
     let findedState; //선택한 카테고리에 따라 게시판이 저장될 변수
-    
+    let [articleCount,setArticleCount] = useState(0);
+    useEffect(()=>{
+        axios.get('/article')
+        .then((res)=>{
+            console.log(res.data.results)
+            dispatch(addArticle(res.data.results))
+            setArticleCount(res.data.count)
+        })
+    },[])
 
     if (props.category == -1) { // category가 every(-1)인 경우 
         findedState = state.article;
@@ -33,20 +42,21 @@ function Article(props) {
         <div className='article-top'>
             <h2 style={{ marginBottom: '100px' }}>
                 {
-                    props.category == -1 
-                    ? 'every' 
-                    : props.category == 0 
-                    ? 'spring-warm' 
-                    :  props.category == 1
-                    ? 'summer-cool' 
+                    props.category == 0 
+                    ? '전체' 
+                    : props.category == 1 
+                    ? '여름 쿨톤' 
                     :  props.category == 2
-                    ? 'fall-warm' 
+                    ? '겨울 쿨톤' 
                     :  props.category == 3
-                    ? 'winter-cool' 
+                    ? '가을 웜톤' 
+                    :  props.category == 4
+                    ? '봄 웜톤' 
                     : ''
                 }
             </h2>
-
+            
+            <div style={{height:'130px'}}>전체 게시글 수 : {articleCount}</div>
             {
                 findedState.length == 0
                     ?
@@ -64,10 +74,9 @@ function Article(props) {
                                                 <div>작성자 : {a.user}</div>
                                             </div>
                                         </div>
-
-                                        <div className='article-body' onClick={() => { navigate('/board/detail/' + a.id) }} >
+                                        {/* <div className='article-body' onClick={() => { navigate('/board/detail/' + a.id) }} >
                                             {previewContent(a.content)}
-                                        </div>
+                                        </div> */}
                                     </div>
                                 )
                             })
