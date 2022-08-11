@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Button } from 'react-bootstrap'
 import './SignUp.css'
+import { useNavigate } from 'react-router';
 function SignUp() {
     let [passwordModal, setPasswordModal] = useState(false)
     let [pw1, setPw1] = useState('')
     let [pw2, setPw2] = useState('')
-
+    let navigate = useNavigate();
     useEffect(() => {
         if (pw1 != pw2 && pw2.length > 0) {
             setPasswordModal(true)
@@ -20,15 +21,16 @@ function SignUp() {
             <form action="/"
                 onSubmit={function (e) {
                     e.preventDefault();
-                    axios.post('/user/register', {
+                    axios.post('/user/register/', {
                         username: e.target.username.value,
                         password1: e.target.password1.value,
                         password2: e.target.password2.value,
                         nickname: e.target.nickname.value,
-                        gender: e.target.gender.value
+                        gender: e.target.gender.value=='femail'?'W':'M'
                     }).then((res) => {
-                        if (res.status === 201) { // 가입 성공
+                        if (res.status == 200) { // 가입 성공
                             alert(res.data.message);
+                            navigate('/signin')
                         } else { // 가입 실패
                             alert('가입 실패!!');
                         }
