@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 
 import { logoutUser } from '../../api/url';
-import { getCookieToken,removeCookieToken } from '../../cookie/Cookie';
-import { deleteToken } from '../../store';
+import { getRefreshToken,removeRefreshToken } from '../../cookie/Cookie';
+import { deleteAuthToken } from '../../store';
 
 function SignOut(){
     const {accessToken} = useSelector(state=>state.token);
@@ -14,26 +14,28 @@ function SignOut(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
-    const refreshToken = getCookieToken();
+    const refreshToken = getRefreshToken();
 
-    async function logout(){
-        const response = await logoutUser(refreshToken);
+    function logout(){
+        removeRefreshToken();
+        dispatch(deleteAuthToken());
+        alert('로그아웃 되었습니다')
+        // const response = await logoutUser(refreshToken);
         
-        if(response.status){
-            dispatch(deleteToken());
-            removeCookieToken();
-            return navigate('/signup');
-        }else{
-            alert('로그아웃 실패ㅜ.ㅜ');
-        }
+        // if(response.status){
+        //     dispatch(deleteToken());
+        //     removeCookieToken();
+        //     return navigate('/signup');
+        // }else{
+        //     alert('로그아웃 실패ㅜ.ㅜ');
+        // }
     }
-    useEffect(()=>{
-        logout()
-    },[]);
+   
 
     return(
         <>
-            <Link to="/signup" />
+            <button onClick={logout             
+            }>로그아웃</button>
         </>
     )
 }
