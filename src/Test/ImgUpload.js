@@ -3,7 +3,9 @@ import './ImgUpload.css';
 import {Button} from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
 import default_image from '../img/default_image.jpg';
-//import axios from 'axios';
+import axios from 'axios';
+import base64 from 'base-64';
+
 
 function ImgUpload() {
     let navigate = useNavigate();
@@ -38,22 +40,37 @@ function ImgUpload() {
         });
     }
 
-    // const sendImageToServer = async () => {
-    //     if(image.image_file){
-    //       const formData = new FormData()
-    //       formData.append('file', image.image_file);
-    //       await axios.post('/api/image/upload', formData);
-    //       alert("서버에 등록이 완료되었습니다!");
-    //       setImage({
-    //         image_file: "",
-    //         preview_URL: "img/default_image.png",
-    //       });
-    //     }
-    //     else{
-    //       alert("사진을 등록하세요!")
-    //     }
-    // }
-    let PersonalColor = "SpringWarm";
+
+    const sendImageToServer = async () => {
+        const token = localStorage.getItem("accessToken");
+
+        if(image.image_file){
+            const formData = new FormData()
+            formData.append('file', image.image_file);
+            
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+            
+            await axios.post('http://localhost:8000/image/',formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+             .then((res)=>{
+            alert("서버에 등록이 완료되었습니다!");
+            console.log(res);
+            //navigate(`/Result/${PersonalColor}`);
+          }).catch((err)=>{
+            console.log(err);
+          })
+          // setImage({
+          //   image_file: "",
+          //   preview_URL: default_image,
+          // });
+        }
+        else{
+          alert("사진을 등록하세요!")
+        }
+    }
 
     return(
         <>
@@ -85,7 +102,7 @@ function ImgUpload() {
                     <Button color="error" variant="contained" 
                         style={{backgroundColor: "#CD5C5C", color:"white", margin:"5px",
                         marginTop:"20px"}}
-                        onClick={() => navigate(`/Result/${PersonalColor}`)}>
+                        onClick={sendImageToServer}>
                     결과확인
                     </Button>
                 </div>
