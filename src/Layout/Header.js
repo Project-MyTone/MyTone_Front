@@ -1,7 +1,7 @@
 import './Header.css';
 import {Container, Nav, Navbar, Button, ButtonGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
-
+import SignOut from '../components/user/SignOut';
 function Header() {
     let navigate = useNavigate();
     return(
@@ -9,8 +9,12 @@ function Header() {
             <div className="Title">
                 <div className="ProjectName" style={{display:"inline"}}>myTone</div>
                 <ButtonGroup className="LogMenu" size="sm">
-                    <Button href='/signin'className="SignIn" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN IN</Button>
-                    <Button className="SignUp" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN UP</Button>
+                    {
+                        localStorage.getItem('accessToken')!=null
+                        ?<SignOut></SignOut>
+                        :<Button href='/signin'className="SignIn" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN IN</Button>
+                    }
+                    <Button href='/signup' className="SignUp" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN UP</Button>
                 </ButtonGroup>
             </div>
             <Navbar bg="light" variant="light">

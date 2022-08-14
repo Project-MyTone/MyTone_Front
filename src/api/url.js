@@ -19,6 +19,8 @@ const getPromise=async(url,option)=>{
     ])
 }
 
+
+
 export const loginUser = async(credentials)=>{
     const option={
         method:'POST',

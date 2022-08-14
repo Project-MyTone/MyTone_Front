@@ -1,14 +1,18 @@
 .article-top{
     width: 100vw;
-    padding: 5vh 20vw 5vh 20vw;
+    padding: 5vh 25vw 5vh 25vw;
     min-width:545px;
     min-height: 500px;
 }
 .article-contents{
     position: relative;
-    min-height: 140px;
+    min-height: 100px;
     border-bottom: 1px solid #E2E2E2;
-    margin-bottom:35px;
+    margin-bottom:30px;
+    cursor: pointer;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
     
     
 }
@@ -16,12 +20,19 @@
 .article-header{
     display:flex;
     justify-content: space-between;
-    padding-bottom: 18px;
+    align-items: center;
 }
 .article-header > div{
     display: flex;
     width:300px;
     justify-content: space-around;
+}
+.article-header > p{
+    opacity: 0.5;
+    margin:0;
+}
+.article-header > p:hover{
+    opacity: 1;
 }
 .article-body{
     padding-bottom: 15px;
