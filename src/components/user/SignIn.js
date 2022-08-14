@@ -13,6 +13,7 @@ import { setAuthToken } from '../../store';
 import { Button } from 'react-bootstrap'
 import './SignIn.css'
 
+
 function SignIn() {
     // let [passwordModal, setPasswordModal] = useState(false)
     // let [pw1, setPw1] = useState('')
@@ -47,13 +48,13 @@ function SignIn() {
             <div className="login-box">
                 <form onSubmit={ (e)=>{
                         e.preventDefault();
-                        axios.post('/user/login/', {
+                        axios.post('http://localhost:8000/user/login/', {
                             username: e.target.username.value,
                             password: e.target.password.value,
                         })
                         .then((res)=>{
                             if(res.status==200){
-                                alert(res.data.message)
+                                alert(res.data.message);
                                 setRefreshToken(res.data.token.refresh_token);
                                 dispatch(setAuthToken(res.data.token.access_token));
                                 navigate("/");
