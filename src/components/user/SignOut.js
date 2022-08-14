@@ -1,25 +1,19 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-
-
-import { logoutUser } from '../../api/url';
+import {Button} from 'react-bootstrap'
 import { getRefreshToken,removeRefreshToken } from '../../cookie/Cookie';
 import { deleteAuthToken } from '../../store';
 
 function SignOut(){
-    const {accessToken} = useSelector(state=>state.token);
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
     
-    const refreshToken = getRefreshToken();
+    const dispatch = useDispatch();
 
     function logout(){
         removeRefreshToken();
         dispatch(deleteAuthToken());
-        alert('로그아웃 되었습니다')
+        window.location.reload()
+        alert('로그아웃 되었습니다');
+        
         // const response = await logoutUser(refreshToken);
         
         // if(response.status){
@@ -34,8 +28,8 @@ function SignOut(){
 
     return(
         <>
-            <button onClick={logout             
-            }>로그아웃</button>
+            <Button style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}} onClick={logout             
+            }>SIGN OUT</Button>
         </>
     )
 }
