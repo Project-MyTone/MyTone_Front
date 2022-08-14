@@ -17,15 +17,13 @@ import PrivateRoute from './routes/PrivateRoute.js'
 import axios from "axios"
 import SignOut from './components/user/SignOut.js'
 function App() {
-  let [category, setCategory] = useState(-1); // 0:all, 1:여름 쿨톤, 2:겨울 쿨톤, 3:가을 웜톤, 4:봄 웜톤
+  let [category, setCategory] = useState(0); // 0:all, 1:여름 쿨톤, 2:겨울 쿨톤, 3:가을 웜톤, 4:봄 웜톤
  
-
-  
  
   return (
     <div className="App">
       <Header></Header>
-      <SignOut></SignOut>
+      
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Main />}></Route>
