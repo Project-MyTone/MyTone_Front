@@ -29,7 +29,11 @@ let article = createSlice({
         deleteArticle(state,action){
             let findedIndex = state.findIndex((e)=>e.id==action.payload);
             state.splice(findedIndex,1);
+        },
+        clearArticle(state,action){
+            state.length=0
         }
+
     }
 })
 
@@ -60,7 +64,7 @@ let token = createSlice({
 })
 
 export let {addArticleCategory} = articleCategory.actions
-export let {addArticle,editArticle,deleteArticle} = article.actions
+export let {addArticle,editArticle,deleteArticle,clearArticle} = article.actions
 export let {setAuthToken, deleteAuthToken} = token.actions
 
 export default configureStore({
