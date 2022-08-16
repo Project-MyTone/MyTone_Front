@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Button } from 'react-bootstrap'
+import { Button,Form } from 'react-bootstrap'
 import './SignUp.css'
 import { useNavigate } from 'react-router';
 function SignUp() {
@@ -18,7 +18,10 @@ function SignUp() {
     }, [pw1, pw2])
     return (
         <div className="signUp">
-            <form action="/"
+            <h2>
+                회원가입
+            </h2>
+            <Form action="/"
                 onSubmit={function (e) {
                     e.preventDefault();
                     axios.post('/user/register/', {
@@ -38,49 +41,24 @@ function SignUp() {
                         console.log(err);
                     })
                 }}>
-                <table style={{margin:'0 auto',position:'relative'}}>
-                    
-                    <tr>
-                        <td>아이디:</td>
-                        <td>
-                            <input type="text" name="username" placeholder="username"></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>비밀번호:</td>
-                        <td>                
-                            <input type="password" name="password1" placeholder="password1" onChange={(e) => { setPw1(e.target.value) }}></input>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>비밀번호 확인:</td>
-                        <td>                    
-                            <input type="password" name="password2" placeholder="password2" onChange={(e) => { setPw2(e.target.value) }}></input>
-                        </td>
-                    </tr>
-                    {
-                        passwordModal == true ? <div style={{position:'absolute',right:'-299px',top:'83px'}}className="alert alert-warning">일치하는 비밀번호를 입력해주세요</div> : null
-                    }
-
-                    <tr>
-                        <td>닉네임:</td>
-                        <td>
-                            <input type="text" name="nickname" placeholder="nickname"></input>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>성별</td>
-                        <td style={{display:'flex',justifyContent:'space-evenly'}}>
-                            <div><input type='radio' name='gender' value='female' />여성</div>
-                            <div><input type='radio' name='gender' value='male' />남성</div>
-                        </td>
-                    </tr>
-                    
-                </table>
-                <div style={{display:'flex',justifyContent:'center'}}>
-                        <input type="submit" value="Sign up!"></input>
+                <Form.Label>아이디</Form.Label>
+                <Form.Control type="text" name="username" placeholder="아이디 입력" />
+                <Form.Label>비밀번호</Form.Label>
+                <Form.Control  type="password" name="password1" placeholder="비밀번호 입력" onChange={(e) => { setPw1(e.target.value) }} />
+                <Form.Label>비밀번호 재입력</Form.Label>
+                <Form.Control  type="password" name="password2" placeholder="비밀번호 재입력" onChange={(e) => { setPw2(e.target.value) }} />
+                {
+                    passwordModal == true ? <div style={{marginTop:'16px'}}className="alert alert-warning">일치하는 비밀번호를 입력해주세요</div> : null
+                }
+                <Form.Label>닉네임</Form.Label>
+                <Form.Control  type="text" name="nickname"  placeholder="닉네임" />
+                <div>
+                <Form.Check inline type='radio' name='gender' label='여성' value='female'/>
+                <Form.Check inline type='radio' name='gender' label='남성' value='male'/>
                 </div>
-            </form>
+                <Button variant="success" type="submit">가입하기</Button>
+            </Form>
+          
         </div>
     );
 

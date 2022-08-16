@@ -26,6 +26,25 @@
 }
 .img-container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin-bottom: 20px;
+    
+}
+.img-container > img{
+    max-width:500px;
+    max-height:500px;
+    object-fit: fill;
+}
+.comment{
+    display:flex;
+    justify-content: space-between;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    min-height: 80px;
+    margin-bottom:15px;
+}
+.comment-content{
+    display: flex;
+    align-items: center;
 }

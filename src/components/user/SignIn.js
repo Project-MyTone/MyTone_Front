@@ -21,6 +21,10 @@ function SignIn() {
     // useForm 사용을 위한 선언
     const { register, setValue, formState: { errors }, handleSubmit } = useForm();
 
+<<<<<<< HEAD
+=======
+   
+>>>>>>> 74b958e5d0bfb165e9c26fc55da87aabc14f76b8
   
     return (
         <div className='login'>
@@ -35,8 +39,12 @@ function SignIn() {
                         .then((res)=>{
                             if(res.status==200){
                                 alert(res.data.message)
+<<<<<<< HEAD
                                 const userId = res.data.token.user;
                                 console.log(res.data.token.user);
+=======
+                                console.log(res.data.token.user) // user_id
+>>>>>>> 74b958e5d0bfb165e9c26fc55da87aabc14f76b8
                                 setRefreshToken(res.data.token.refresh_token);
                                 dispatch(setAuthToken(res.data.token.access_token));
                                 navigate(`/userInfo/${userId}`);

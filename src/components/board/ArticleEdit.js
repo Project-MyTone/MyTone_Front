@@ -1,6 +1,6 @@
 
 import {useNavigate, useParams} from 'react-router-dom'
-import {Form} from 'react-bootstrap'
+import {Button, Form} from 'react-bootstrap'
 import {useEffect, useState} from 'react'
 import './ArticleEdit.css'
 import axios from 'axios'
@@ -13,16 +13,16 @@ function ArticleEdit(){
     let [createAt,setCreateAt] = useState('');
     let [boardId,setBoardId] = useState(0);
     let [user,setUser] = useState('');
-
+    const accessToken=localStorage.getItem('accessToken');
     useEffect(()=>{
         axios.get(`/article/${id}`)
         .then((res)=>{
             if(res.status===200){
-                setBoardId(res.data.id)
+                //setBoardId(res.data.id)
                 setTitle(res.data.title);
                 setContent(res.data.content);
                 
-                setUser(res.data.user.username);
+                //setUser(res.data.user.uername);
             }
             
         })
@@ -30,7 +30,37 @@ function ArticleEdit(){
             console.log(err)
         })
     },[])
-   
+
+   function editArticle(){
+        
+        if(accessToken!=null){
+            axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
+                        
+            axios.patch(`/article/${id}/`,{
+                title:title,
+                content:content
+            })
+            .then((res)=>{
+                console.log(res)
+                if(res.status==200){
+                    alert('수정완료')
+                    navigate(`/board/detail/${id}`)
+                }
+            })
+            .catch((err)=>{
+                //alert(err.response.data.detail)
+                
+                //console.log(err.response.status)
+                if(err.response.status==403){
+                    alert('본인의 게시물만 수정 가능합니다')
+                    navigate(-1)
+                }
+            })
+        }else{
+            alert('인증토큰이 없습니다')
+        }
+    }
+
     return(
         <>
         
@@ -47,7 +77,9 @@ function ArticleEdit(){
                 <Form.Label>내용</Form.Label>
                 <Form.Control style={{minHeight:"300px",minWidth:"500px"}} value={content} onChange={(e)=>{setContent(e.target.value)}} as="textarea" rows={3} />
             </Form.Group>
-            
+            <div style={{display:'flex', justifyContent:'center'}}>
+                <Button variant="light" onClick={editArticle}>수정완료</Button>
+            </div>
         </div>
         </>
     )

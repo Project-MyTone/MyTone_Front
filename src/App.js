@@ -22,7 +22,8 @@ import UserInfoUpdate from './components/user/UserInfoUpdate.js'
 
 function App() {
   let [category, setCategory] = useState(0); // 0:all, 1:여름 쿨톤, 2:겨울 쿨톤, 3:가을 웜톤, 4:봄 웜톤
- 
+  let [searchToggle,setSearchToggle] = useState(false); //게시판 검색을 위한 state(true : 검색했음, false : 검색하지 않음)
+  
  
   return (
     <div className="App">
@@ -33,9 +34,15 @@ function App() {
           <Route path="/" element={<Main />}></Route>
           <Route path="/signup" element={<SignUp></SignUp>}></Route>
           <Route path="/signin" element={<SignIn></SignIn>}></Route>
+<<<<<<< HEAD
 
           <Route path="/board" element={<ArticleCategory category={category} setCategory={setCategory} />}> {/*nested route 사용*/}
             <Route path="list" element={<Article category={category}/>}></Route>  {/*/board/list로 접속하면 카테고리와 게시판 목록을 보여줌*/}
+=======
+          
+          <Route path="/board" element={<ArticleCategory category={category} setCategory={setCategory} setSearchToggle={setSearchToggle} />}> {/*nested route 사용*/}
+            <Route path="list" element={<Article category={category} setCategory={setCategory} searchToggle={searchToggle} setSearchToggle={setSearchToggle}  />}></Route>  {/*/board/list로 접속하면 카테고리와 게시판 목록을 보여줌*/}
+>>>>>>> 74b958e5d0bfb165e9c26fc55da87aabc14f76b8
             <Route path="detail/:id" element={<ArticleDetail setCategory={setCategory}/>}></Route> {/*/board/detail/:id로 접속하면 카테고리와 상세 게시판을 보여줌*/}
           </Route>
           
