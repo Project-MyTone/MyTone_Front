@@ -3,23 +3,27 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router';
 import { addArticle } from '../../store.js'
 import {Dropdown,Button} from 'react-bootstrap'
+import { removeRefreshToken } from '../../cookie/Cookie.js';
+import { deleteAuthToken } from '../../store.js';
 import './ArticlePost.css'
 import axios from 'axios';
 function ArticlePost() {
     let [title, setTitle] = useState('');
     let [content, setContent] = useState('');
-    let [image,setImage] = useState(''); // 이미지
+    let [image,setImage] = useState(); // 이미지
     let [category,setCategory] = useState(1);
     
     let dispatch = useDispatch();
     let navigate = useNavigate();
     
-    let accessToken=localStorage.getItem('accessToken');
+    const accessToken=localStorage.getItem('accessToken');
 
     let onLoadFile = (e)=>{ // 이미지
-        const file = e.target.files;
-        //console.log(file);
+        
+        let file = e.target.files;
+        
         setImage(file);
+        //console.log(image)
     }
 
     
@@ -27,7 +31,7 @@ function ArticlePost() {
         <div className='post-top'>
             <div className="post-header">
                 <div>
-                    <input type="text" name="title" onChange={(e) => { setTitle(e.target.value) }} />
+                    <input type="text" name="title" onChange={(e) => { setTitle(e.target.value) }} placeholder="제목을 입력해 주세요" />
                 </div>
 
                 <Dropdown>
@@ -54,15 +58,20 @@ function ArticlePost() {
             </div>
             <br></br>
             <div style={{width:'100%', height:'75%',marginBottom:'15px'}}>
-                <textarea style={{width:'100%', height:'100%'}} name="content" onChange={(e) => { setContent(e.target.value) }}></textarea>
+                <textarea style={{width:'100%', height:'100%'}} name="content" onChange={(e) => { setContent(e.target.value) }} placeholder="내용을 입력해 주세요"></textarea>
             </div>
             <form>
-                <input type='file' accept="img/*" onChange={onLoadFile}></input>
+                <input type='file' accept="img/*" multiple onChange={onLoadFile}></input>
             </form>
             <Button variant="light" onClick={() => {
                 const formdata = new FormData();
-                console.log(image[0]); //이미지
-                formdata.append('image',image[0]); //이미지
+                
+                if(image!=undefined && image.length>0){
+                    for(let i=0;i<image.length;i++){
+                        formdata.append('image',image[i]); //이미지
+                    }
+                }
+                
                 formdata.append('title',title);
                 formdata.append('content',content);
                 formdata.append('board',parseInt(category));
@@ -85,13 +94,20 @@ function ArticlePost() {
                 .then((res)=>{
                     if(res.status==201){
                         alert(res.statusText)
+
                         navigate('/board/list')
+                        //window.location.reload();
                     }
                 })
                 .catch((err)=>{
+                    console.log(err.response.status)
+                    if(err.response.status==401){
+                        removeRefreshToken();
+                        dispatch(deleteAuthToken());
+                        alert('로그인이 만료되었습니다. 다시 로그인 해주세요')
+                        navigate('/signin')
+                    }
                     
-                    alert('게시글을 작성하려면 로그인이 필요합니다')
-                    navigate('/signin')
                     
                 })
                 
