@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+.cosmetic_container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.cosmetic_title{
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+.cosmetic_item{
+    margin: 20px;
+}
