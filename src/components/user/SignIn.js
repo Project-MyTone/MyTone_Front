@@ -13,6 +13,7 @@ import { setAuthToken } from '../../store';
 import { Button } from 'react-bootstrap'
 import './SignIn.css'
 
+
 function SignIn() {
 
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ function SignIn() {
             <div className="login-box">
                 <form onSubmit={ (e)=>{
                         e.preventDefault();
-                        axios.post('/user/login/', {
+                        axios.post('http://localhost:8000/user/login/', {
                             username: e.target.username.value,
                             password: e.target.password.value,
                         })

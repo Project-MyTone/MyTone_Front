@@ -8,16 +8,16 @@ import { useParams } from 'react-router-dom';
 function Result() {
     let {PersonalColor} = useParams();
     
-    if(PersonalColor == 'SpringWarm'){
+    if(PersonalColor == '봄웜톤(spring)'){
         return <Spring_Warm></Spring_Warm>
     }
-    else if(PersonalColor == 'SummerCool'){
+    else if(PersonalColor == '여름쿨톤(summer)'){
         return <Summer_Cool></Summer_Cool>
     }
-    else if(PersonalColor == 'AutumnWarm'){
+    else if(PersonalColor == '가을웜톤(autumn)'){
         return <Autumn_Warm></Autumn_Warm>
     }
-    else if(PersonalColor == 'WinterCool'){
+    else if(PersonalColor == '겨울쿨톤(winter)'){
         return <Winter_Cool></Winter_Cool>
     }
 }

@@ -1,97 +1,61 @@
-import { useState } from 'react';
+import {useState} from 'react'
+import axios from 'axios';
+import {Button} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 import './ImgUpload.css';
-import {Button} from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom';
-import default_image from '../img/default_image.jpg';
-//import axios from 'axios';
 
 function ImgUpload() {
-    let navigate = useNavigate();
-    let inputRef;
+  let [image,setImage] = useState('');
+  let accessToken=localStorage.getItem('accessToken');
+  let navigate = useNavigate();
 
-    const [image, setImage] = useState({
-        image_file: "",
-        preview_URL: default_image
-    });
+  let onLoadFile = (e)=>{ // 이미지
+    const file = e.target.files;
+    setImage(file);
+  }
 
-    const saveImage = (e) => {
-        e.preventDefault();
-        const fileReader = new FileReader();
-        
-        if(e.target.files[0]){
-          fileReader.readAsDataURL(e.target.files[0])
-        }
-        fileReader.onload = () => {
-          setImage(
-            {
-              image_file: e.target.files[0],
-              preview_URL: fileReader.result
-            }
-          )
-        }
-    }
+  return(
+    <div className="ImgUpload_BG">
+      <div className="container">
+      <h1 className="ImgUpload_Title">원하는 이미지를 선택하세요.</h1>
+      <form>
+        <input type='file' accept="img/*" onChange={onLoadFile}></input> 
+      </form>
 
-    const deleteImage = () => {
-        setImage({
-          image_file: "",
-          preview_URL: default_image
-        });
-    }
+      <Button style={{backgroundColor: "#CD5C5C", color:"white", 
+                        marginTop:"25px", border:"none", marginBottom:"30px"}}
+              onClick={() => {
+                const formdata = new FormData();
+                formdata.append('image',image[0]); //이미지
 
-    // const sendImageToServer = async () => {
-    //     if(image.image_file){
-    //       const formData = new FormData()
-    //       formData.append('file', image.image_file);
-    //       await axios.post('/api/image/upload', formData);
-    //       alert("서버에 등록이 완료되었습니다!");
-    //       setImage({
-    //         image_file: "",
-    //         preview_URL: "img/default_image.png",
-    //       });
-    //     }
-    //     else{
-    //       alert("사진을 등록하세요!")
-    //     }
-    // }
-    let PersonalColor = "SpringWarm";
-
-    return(
-        <>
-            <div className="ImgUpload_BG">
-                <div style={{position: "relative", top: "120px"}}>
-                    <h3 className="upload_title">이미지 업로드</h3>
+                axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
                 
-                    <input type="file" accept="image/*"
-                    onChange={saveImage}
-                    onClick={(e)=>e.target.value = null}
-                    ref={refParam => inputRef = refParam}
-                    style={{ display: "none" }}/>
-
-                    <div className="img-wrapper">
-                    <img src={image.preview_URL} className="upload_img"/>
-                    </div>
-                    <Button type="primary" variant="contained" 
-                        style={{backgroundColor: "#CD5C5C", color:"white", margin:"5px",
-                        marginTop:"20px"}}
-                        onClick={() => inputRef.click()}>
-                        등록
-                    </Button>
-                    <Button color="error" variant="contained" 
-                        style={{backgroundColor: "#CD5C5C", color:"white", margin:"5px",
-                        marginTop:"20px"}}
-                        onClick={deleteImage}>
-                    삭제
-                    </Button>
-                    <Button color="error" variant="contained" 
-                        style={{backgroundColor: "#CD5C5C", color:"white", margin:"5px",
-                        marginTop:"20px"}}
-                        onClick={() => navigate(`/Result/${PersonalColor}`)}>
-                    결과확인
-                    </Button>
-                </div>
-            </div>
-        </>
-    );
+                axios.post('/image/',formdata,{
+                    headers : {
+                        "Content-Type" : "multipart/form-data"
+                    }
+                })            
+                .then((res)=>{
+                    if(res.status==201){
+                        let personal = res.data.personal;
+                        navigate(`/Result/${personal}`);
+                    }
+                })
+                .catch((err)=>{
+                  if(err.response.status==401){
+                    alert("로그인된 사용자만 가능합니다.");
+                    navigate('/signin');
+                  }
+                  else if(err.response.status==500){
+                    alert("이미지를 인식하기 어렵습니다.");
+                  }
+                })
+                
+                }}>결과 확인</Button>
+                <div className="sub_text">사진에 따라 이미지 인식이 어려울 수 있습니다😥</div>
+      </div>
+    </div>
+  );
 }
 
-export default ImgUpload;
+export default ImgUpload
