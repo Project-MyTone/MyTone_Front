@@ -11,10 +11,15 @@ function Header() {
                 <ButtonGroup className="LogMenu" size="sm">
                     {
                         localStorage.getItem('accessToken')!=null
-                        ?<SignOut></SignOut>
-                        :<Button href='/signin'className="SignIn" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN IN</Button>
+                        ?
+                        <SignOut></SignOut>
+                        :
+                        <>
+                            <Button href='/signin'className="SignIn" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN IN</Button>
+                            <Button href='/signup' className="SignUp" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN UP</Button>
+                        </>
                     }
-                    <Button href='/signup' className="SignUp" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN UP</Button>
+                    
                 </ButtonGroup>
             </div>
             <Navbar bg="light" variant="light">
