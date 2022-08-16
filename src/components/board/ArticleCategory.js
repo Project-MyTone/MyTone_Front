@@ -49,11 +49,11 @@ function ArticleCategory(props) {
 				</Offcanvas.Header>
 
 				<Offcanvas.Body className='category-top'>
-					<div className="category-list" onClick={() => { props.setCategory(0); navigate('/board/list') }} >전체</div>
+					<div className="category-list" onClick={() => { props.setCategory(0); props.setSearchToggle(false); navigate('/board/list') }} >전체</div> 
 					{
 						state.articleCategory.map((a, i) => {
 							return (
-								<div className="category-list" onClick={() => { props.setCategory(a.id); navigate('/board/list') }} key={i}>{a.name}</div>
+								<div className="category-list" onClick={() => { props.setCategory(a.id);props.setSearchToggle(false); navigate('/board/list') }} key={i}>{a.name}</div>
 							)
 						})
 					}
