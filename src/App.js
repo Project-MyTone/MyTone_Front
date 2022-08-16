@@ -16,6 +16,10 @@ import Loading from './components/loading/Loading'
 import PrivateRoute from './routes/PrivateRoute.js'
 import axios from "axios"
 import SignOut from './components/user/SignOut.js'
+import Cosmetic from './cosmetics/cosmetic'
+import UserInfo from './components/user/UserInfo'
+import UserInfoUpdate from './components/user/UserInfoUpdate.js'
+
 function App() {
   let [category, setCategory] = useState(0); // 0:all, 1:여름 쿨톤, 2:겨울 쿨톤, 3:가을 웜톤, 4:봄 웜톤
  
@@ -29,7 +33,7 @@ function App() {
           <Route path="/" element={<Main />}></Route>
           <Route path="/signup" element={<SignUp></SignUp>}></Route>
           <Route path="/signin" element={<SignIn></SignIn>}></Route>
-          
+
           <Route path="/board" element={<ArticleCategory category={category} setCategory={setCategory} />}> {/*nested route 사용*/}
             <Route path="list" element={<Article category={category}/>}></Route>  {/*/board/list로 접속하면 카테고리와 게시판 목록을 보여줌*/}
             <Route path="detail/:id" element={<ArticleDetail setCategory={setCategory}/>}></Route> {/*/board/detail/:id로 접속하면 카테고리와 상세 게시판을 보여줌*/}
@@ -40,6 +44,9 @@ function App() {
             <Route path="/edit/:id" element={<ArticleEdit></ArticleEdit>}></Route>
             <Route path="/image" element={<ImgUpload></ImgUpload>}></Route>
             <Route path="/Result/:PersonalColor" element={<Result></Result>}></Route>
+            <Route path="/userInfo/:id" element={<UserInfo></UserInfo>}></Route>
+            <Route path="/cosmetic" element={<Cosmetic></Cosmetic>}></Route>
+            <Route path="/userInfo/:id/update" element={<UserInfoUpdate></UserInfoUpdate>}></Route>
           {/* </Route> */}
           <Route path='*' element={<div>잘못된 경로입니다:(</div>}></Route>
         </Routes>

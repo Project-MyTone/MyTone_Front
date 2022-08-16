@@ -2,9 +2,11 @@ import './Main.css';
 import {Button} from 'react-bootstrap';
 import MainImg from '../img/main_img.jpg';
 import {useNavigate} from 'react-router-dom'
+import userID from '../components/user/UserInfo'
 
 function Main() {
     let navigate = useNavigate();
+
     return(
         <>
             <div>

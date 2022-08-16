@@ -13,35 +13,15 @@ import { setAuthToken } from '../../store';
 import { Button } from 'react-bootstrap'
 import './SignIn.css'
 
-
 function SignIn() {
-    // let [passwordModal, setPasswordModal] = useState(false)
-    // let [pw1, setPw1] = useState('')
-    // let [pw2, setPw2] = useState('')
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     let state = useSelector((state)=>state)
     // useForm 사용을 위한 선언
     const { register, setValue, formState: { errors }, handleSubmit } = useForm();
 
-    // submit 이후 동작할 코드
-    // 백으로 유저 정보 전달
-    const onValid = async ({ username, password }) => {
-        const response = await loginUser({ username, password });
-        console.log(response)
-        // if (response.status) {
-        //     // 쿠키에 Refresh Token, store에 Access Token 저장
-        //     setRefreshToken(response.json.token.refresh_token);
-        //     dispatch(setAuthToken(response.json.token.access_token));
-
-        //     return navigate("/");
-        // } else {
-        //     console.log(response.json);
-        // }
-        // // input 태그 값 비워주는 코드
-        // setValue("password", "");
-    };
-
+  
     return (
         <div className='login'>
             <h3>회원 로그인</h3>
@@ -54,10 +34,12 @@ function SignIn() {
                         })
                         .then((res)=>{
                             if(res.status==200){
-                                alert(res.data.message);
+                                alert(res.data.message)
+                                const userId = res.data.token.user;
+                                console.log(res.data.token.user);
                                 setRefreshToken(res.data.token.refresh_token);
                                 dispatch(setAuthToken(res.data.token.access_token));
-                                navigate("/");
+                                navigate(`/userInfo/${userId}`);
                             }
                         })
                         .catch((err)=>{
@@ -113,4 +95,4 @@ function SignIn() {
 
 
 
-export default SignIn
+export default SignIn;
