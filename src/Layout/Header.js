@@ -2,7 +2,8 @@ import './Header.css';
 import {Container, Nav, Navbar, Button, ButtonGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import SignOut from '../components/user/SignOut';
-function Header() {
+
+function Header(props) {
     let navigate = useNavigate();
     return(
         <>
@@ -12,7 +13,11 @@ function Header() {
                     {
                         localStorage.getItem('accessToken')!=null
                         ?
-                        <SignOut></SignOut>
+                        <>
+                            <SignOut></SignOut>
+                            <Button style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}} 
+                                onClick={()=>{navigate(`/userInfo/${props.value}`)}}>USER INFO</Button>
+                        </>
                         :
                         <>
                             <Button href='/signin'className="SignIn" style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}}>SIGN IN</Button>
@@ -25,8 +30,8 @@ function Header() {
             <Navbar bg="light" variant="light">
                 <Container>
                 <Nav className="me-auto">
-                    <Nav.Link href='/'>홈</Nav.Link>
-                    <Nav.Link href='/image'>테스트</Nav.Link>
+                    <Nav.Link onClick={()=>{navigate('/')}}>홈</Nav.Link>
+                    <Nav.Link onClick={()=>{navigate('/image')}}>테스트</Nav.Link>
                     <Nav.Link onClick={()=>{navigate('/board/list')}}>게시판</Nav.Link>
                 </Nav>
                 </Container>

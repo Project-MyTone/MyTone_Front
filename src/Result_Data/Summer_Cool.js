@@ -2,8 +2,12 @@ import { Button } from 'react-bootstrap';
 import './Summer_Cool.css';
 import summer_Img from '../img/summer_main_img.jpg';
 import summer_color_Img from '../img/summer_color.jpg';
+import {useNavigate} from 'react-router-dom'
 
 function Summer_Cool(){
+    let navigate = useNavigate();
+    let colorID = 1;
+
     return(
         <>
             <div className="summer_title_BG">
@@ -11,7 +15,8 @@ function Summer_Cool(){
                 <img src={summer_Img} className="summer_Img"></img>
                 <div>
                     <Button className="share_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}>공유하기</Button>
-                    <Button className="cosmetic_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}>화장품 추천</Button>
+                    <Button className="cosmetic_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}
+                    onClick={()=>{navigate(`/cosmetic/${colorID}`)}}>화장품 추천</Button>
                 </div>
             </div>
             <div className="summer_content_BG">

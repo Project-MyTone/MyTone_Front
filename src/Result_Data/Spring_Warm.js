@@ -2,8 +2,12 @@ import { Button } from 'react-bootstrap';
 import './Spring_Warm.css';
 import spring_Img from '../img/spring_main_img.jpg';
 import spring_color_Img from '../img/spring_color.jpg';
+import {useNavigate} from 'react-router-dom'
 
 function Spring_Warm(){
+    let navigate = useNavigate();
+    let colorID = 4;
+
     return(
         <>
             <div className="spring_title_BG">
@@ -11,7 +15,8 @@ function Spring_Warm(){
                 <img src={spring_Img} className="spring_Img"></img>
                 <div>
                     <Button className="share_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}>공유하기</Button>
-                    <Button className="cosmetic_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}>화장품 추천</Button>
+                    <Button className="cosmetic_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}
+                     onClick={()=>{navigate(`/cosmetic/${colorID}`)}}>화장품 추천</Button>
                 </div>
             </div>
             <div className="spring_content_BG">

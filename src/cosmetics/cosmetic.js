@@ -1,56 +1,26 @@
 import './cosmetic.css';
+import items from './cosmetic_data/response'
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
-const items = [
-    {
-        id:1,
-        name:"rkskekfk",
-        price:1000,
-    },
-    {
-        id:2,
-        name:"dfadfdfd",
-        price:2000,
-    },
-    {
-        id:3,
-        name:"hello",
-        price:5000,
-    },
-    {
-        id:4,
-        name:"hellozz",
-        price:4500,
-    },
-    {
-        id:5,
-        name:"hellozz",
-        price:4500,
-    },
-    {
-        id:6,
-        name:"hellozz",
-        price:4500,
-    },
-    {
-        id:7,
-        name:"hellozz",
-        price:4500,
-    },
-]
+function Cosmetic() {
+    let {colorid} = useParams();
 
-function cosmetic() {
+    const List = items.results.filter(result => result.color == colorid);
+    
     return(
         <>
         <h3 className="cosmetic_title">화장품 추천 리스트</h3>
         <div className="cosmetic_container">
-            {items.map((item)=>(
-                <div key={item.id} className="cosmetic_item">{item.name}
-                <h3>{item.price}</h3>
-                </div>
+            {List.map((item)=>(
+                <a href={`${item.url}`} target="_blank" className="item_href">
+                    <img src={`${item.image}`}></img>
+                    <div key={item.id} className="cosmetic_item">{item.name}</div>
+                </a>
             ))}
         </div>   
         </>
     );
 }
 
-export default cosmetic
+export default Cosmetic

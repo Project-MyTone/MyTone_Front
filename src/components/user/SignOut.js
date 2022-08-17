@@ -5,9 +5,9 @@ import { getRefreshToken,removeRefreshToken } from '../../cookie/Cookie';
 import { deleteAuthToken } from '../../store';
 
 function SignOut(){
-    
+    let navigate = useNavigate();
     const dispatch = useDispatch();
-
+    
     function logout(){
         removeRefreshToken();
         dispatch(deleteAuthToken());

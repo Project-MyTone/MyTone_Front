@@ -2,8 +2,12 @@ import { Button } from 'react-bootstrap';
 import './Winter_Cool.css';
 import winter_Img from '../img/winter_main_img.jpg';
 import winter_color_Img from '../img/winter_color.jpg';
+import {useNavigate} from 'react-router-dom'
 
 function Winter_Cool(){
+    let navigate = useNavigate();
+    let colorID = 2;
+
     return(
         <>
             <div className="winter_title_BG">
@@ -11,7 +15,8 @@ function Winter_Cool(){
                 <img src={winter_Img} className="winter_Img"></img>
                 <div>
                     <Button className="share_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}>공유하기</Button>
-                    <Button className="cosmetic_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}>화장품 추천</Button>
+                    <Button className="cosmetic_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}
+                    onClick={()=>{navigate(`/cosmetic/${colorID}`)}}>화장품 추천</Button>
                 </div>
             </div>
             <div className="winter_content_BG">

@@ -13,7 +13,7 @@ import { setAuthToken } from '../../store';
 import { Button } from 'react-bootstrap'
 import './SignIn.css'
 
-function SignIn() {
+function SignIn(props) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -34,11 +34,10 @@ function SignIn() {
                         .then((res)=>{
                             if(res.status==200){
                                 alert(res.data.message)
-                                const userId = res.data.token.user;
-                                console.log(res.data.token.user);
+                                props.change_ID(res.data.token.user);
                                 setRefreshToken(res.data.token.refresh_token);
                                 dispatch(setAuthToken(res.data.token.access_token));
-                                navigate(`/userInfo/${userId}`);
+                                navigate('/');
                             }
                         })
                         .catch((err)=>{

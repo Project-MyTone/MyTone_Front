@@ -23,7 +23,7 @@ import UserInfoUpdate from './components/user/UserInfoUpdate.js'
 import { useDispatch } from 'react-redux'
 
 function App() {
-  
+  let [userID, SetUserID] = useState(0);
   let [category, setCategory] = useState(0); // 0:all, 1:여름 쿨톤, 2:겨울 쿨톤, 3:가을 웜톤, 4:봄 웜톤
   let [searchToggle,setSearchToggle] = useState(false); //게시판 검색을 위한 state(true : 검색했음, false : 검색하지 않음)
   let [recommentList,setRecommentList] = useState([])
@@ -41,13 +41,13 @@ function App() {
  
   return (
     <div className="App">
-      <Header></Header>
+      <Header value={userID}></Header>
       
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/signup" element={<SignUp></SignUp>}></Route>
-          <Route path="/signin" element={<SignIn></SignIn>}></Route>
+          <Route path="/signin" element={<SignIn change_ID={SetUserID}></SignIn>}></Route>
 
           
           <Route path="/board" element={<ArticleCategory category={category} setCategory={setCategory} setSearchToggle={setSearchToggle} />}> {/*nested route 사용*/}
@@ -61,7 +61,7 @@ function App() {
             <Route path="/image" element={<ImgUpload></ImgUpload>}></Route>
             <Route path="/Result/:PersonalColor" element={<Result></Result>}></Route>
             <Route path="/userInfo/:id" element={<UserInfo></UserInfo>}></Route>
-            <Route path="/cosmetic" element={<Cosmetic></Cosmetic>}></Route>
+            <Route path="/cosmetic/:colorid" element={<Cosmetic></Cosmetic>}></Route>
             <Route path="/userInfo/:id/update" element={<UserInfoUpdate></UserInfoUpdate>}></Route>
           {/* </Route> */}
           <Route path='*' element={<div>잘못된 경로입니다:(</div>}></Route>

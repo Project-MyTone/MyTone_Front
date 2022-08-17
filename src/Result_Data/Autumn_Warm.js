@@ -2,8 +2,12 @@ import { Button } from 'react-bootstrap';
 import './Autumn_Warm.css';
 import autumn_Img from '../img/Autumn_main_img.jpg';
 import autumn_color_Img from '../img/autumn_color.jpg';
+import {useNavigate} from 'react-router-dom'
 
 function Autumn_Warm(){
+    let navigate = useNavigate();
+    let colorID = 3;
+
     return(
         <>
             <div className="autumn_title_BG">
@@ -11,7 +15,8 @@ function Autumn_Warm(){
                 <img src={autumn_Img} className="autumn_Img"></img>
                 <div>
                     <Button className="share_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}>공유하기</Button>
-                    <Button className="cosmetic_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}>화장품 추천</Button>
+                    <Button className="cosmetic_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}
+                    onClick={()=>{navigate(`/cosmetic/${colorID}`)}}>화장품 추천</Button>
                 </div>
             </div>
             <div className="autumn_content_BG">
