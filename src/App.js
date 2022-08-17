@@ -23,7 +23,7 @@ import UserInfoUpdate from './components/user/UserInfoUpdate.js'
 import { useDispatch } from 'react-redux'
 
 function App() {
-  let dispatch = useDispatch();
+  
   let [category, setCategory] = useState(0); // 0:all, 1:여름 쿨톤, 2:겨울 쿨톤, 3:가을 웜톤, 4:봄 웜톤
   let [searchToggle,setSearchToggle] = useState(false); //게시판 검색을 위한 state(true : 검색했음, false : 검색하지 않음)
   let [recommentList,setRecommentList] = useState([])
@@ -31,11 +31,7 @@ function App() {
     axios.get(`/comment/recomment/`)
         .then((res) => {
             if (res.status == 200) {
-                //setCommentList(res.data.results.filter((e) => e.article == props.id))
-                console.log(res.data.results)
                 setRecommentList(res.data.results)
-                // console.log(res.data.results.filter((e) => e.article == props.id))
-                //console.log(res.data.results)
             }
         })
         .catch((err) => { 
