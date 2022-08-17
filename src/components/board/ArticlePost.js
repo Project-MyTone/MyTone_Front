@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router';
 import { addArticle } from '../../store.js'
-import {Dropdown,Button} from 'react-bootstrap'
+import {Dropdown,Button,Form} from 'react-bootstrap'
 import { removeRefreshToken } from '../../cookie/Cookie.js';
 import { deleteAuthToken } from '../../store.js';
 import './ArticlePost.css'
@@ -30,12 +30,14 @@ function ArticlePost() {
     return (
         <div className='post-top'>
             <div className="post-header">
-                <div>
-                    <input type="text" name="title" onChange={(e) => { setTitle(e.target.value) }} placeholder="제목을 입력해 주세요" />
-                </div>
+                
+                <Form.Group style={{width:'100%'}} className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label >제목</Form.Label>
+                    <Form.Control  type="text"  value={title} onChange={(e)=>{setTitle(e.target.value)}} />
+                </Form.Group>
 
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id='dropdown-basic'>
+                <Dropdown style={{marginTop:'15px'}}>
+                    <Dropdown.Toggle variant="primary" id='dropdown-basic'>
                         {
                         category=='1'
                         ?'여름 쿨톤'
@@ -57,13 +59,17 @@ function ArticlePost() {
                 </Dropdown>
             </div>
             <br></br>
-            <div style={{width:'100%', height:'75%',marginBottom:'15px'}}>
+            {/* <div style={{width:'100%', height:'75%',marginBottom:'15px'}}>
                 <textarea style={{width:'100%', height:'100%'}} name="content" onChange={(e) => { setContent(e.target.value) }} placeholder="내용을 입력해 주세요"></textarea>
-            </div>
-            <form>
+            </div> */}
+             <Form.Group style={{width:'100%'}} className="mb-3" controlId="exampleForm.ControlTextarea1">
+                <Form.Label>내용</Form.Label>
+                <Form.Control style={{minHeight:"300px",minWidth:"500px"}} value={content} onChange={(e)=>{setContent(e.target.value)}} as="textarea" rows={3} />
+            </Form.Group>
+            <form style={{marginBottom:'15px'}}>
                 <input type='file' accept="img/*" multiple onChange={onLoadFile}></input>
             </form>
-            <Button variant="light" onClick={() => {
+            <Button variant="primary" onClick={() => {
                 const formdata = new FormData();
                 
                 if(image!=undefined && image.length>0){
@@ -106,6 +112,7 @@ function ArticlePost() {
                         dispatch(deleteAuthToken());
                         alert('로그인이 만료되었습니다. 다시 로그인 해주세요')
                         navigate('/signin')
+                        window.location.reload()
                     }
                     
                     
