@@ -13,7 +13,7 @@ function Recomment(props) {
 	let [recomment, setRecomment] = useState('');
 	const dispatch = useDispatch();
 	return (
-		<InputGroup className="mb-3" style={{ width: '60%' }}>
+		<InputGroup className="mb-3" style={{ width: '60%',marginLeft:'40px' }}>
 			<p>↳</p>
 			<Form.Control
 				placeholder="대댓글남기기"
@@ -108,7 +108,7 @@ function Comment(props) {
 			window.location.reload()
 		}
 	}
-
+	
 	return (
 		<div className='comment-top'>
 			<h4>댓글</h4>
@@ -134,9 +134,9 @@ function Comment(props) {
 
 								}
 
-								<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '140px' }}>
+								<div className='comment-control'>
 									<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-										<p>작성자 : {a.user}</p>
+										<p style={{margin:'0px'}}>작성자 : {a.user}</p>
 										<Button style={{ padding: '0', height: '26px', width: '26px' }} variant="danger" onClick={() => {
 											axios.defaults.headers.common['Authorization'] = `Bearer ${props.accessToken}`
 											axios.delete(`/comment/${a.id}/`)
@@ -179,12 +179,35 @@ function Comment(props) {
 									return (
 										<div key={i} className='recomment'>
 											<p>↳ {a.body}</p>
-											<p>작성자 : {a.user}</p>
+											<div className='recomment-control'>
+												<p>작성자 : {a.user}</p>
+												<Button style={{ padding: '0', height: '26px', width: '26px' }} variant="light" onClick={() => {
+													axios.defaults.headers.common['Authorization'] = `Bearer ${props.accessToken}`
+													axios.delete(`/comment/recomment/${a.id}/`)
+														.then((res) => {
+															if (res.status == 204) {
+																alert('댓글이 삭제되었습니다.')
+																window.location.reload();
+															}
+
+														})
+														.catch((err) => {
+															if (err.response.status == 403) {
+																alert('본인의 댓글만 삭제 할 수 있습니다!')
+															}
+															else if (err.response.status == 401) {
+																alert('권한이 없습니다!')
+																window.location.reload();
+															}
+														})
+											}}>X</Button>
+											</div>
 										</div>
 									)
 								})
 
 							}
+							
 							{
 								recommentClicked == true && recommentId == a.id
 									?
@@ -245,7 +268,7 @@ function ArticleDetail(props) { //게시판 상세 페이지
 	let [title, setTitle] = useState('');
 	let [content, setContent] = useState('');
 	let [createAt, setCreateAt] = useState('');
-	let [boardId, setBoardId] = useState(0);
+	let [articleId, setArticle] = useState(0);
 	let [user, setUser] = useState('');
 	let [image, setImage] = useState([]);
 
@@ -258,8 +281,8 @@ function ArticleDetail(props) { //게시판 상세 페이지
 					if (res.data.images.length != 0) {
 						setImage(res.data.images)
 					}
-
-					setBoardId(res.data.id)
+					
+					setArticle(res.data.id)
 					setTitle(res.data.title);
 					setContent(res.data.content);
 					setCreateAt(formatDate(res.data.created_at));
@@ -315,6 +338,8 @@ function ArticleDetail(props) { //게시판 상세 페이지
 		}
 	}
 
+	
+
 
 	return (
 		<>
@@ -323,6 +348,23 @@ function ArticleDetail(props) { //게시판 상세 페이지
 				<div className='detail-header'>
 					<div style={{ fontWeight: 'bold', fontSize: 'larger' }}>{title}</div>
 					<div className="header-detail">
+						<div className="like-button" onClick={()=>{
+							axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
+							axios.post(`/article/${articleId}/like`)
+							.then((res)=>{
+								console.log(res)
+								if(res.status==200){
+									alert('좋아요!')
+								}
+							})
+							.catch((err)=>{
+								console.log(err)
+								if(err.response.status==401){
+									alert('로그인 후 좋아요 버튼을 누를 수 있습니다')
+									window.location.reload();
+								}
+							})
+						}}>❤</div>
 						<div>작성일자 : {createAt}</div>
 						<div>{user}</div>
 					</div>

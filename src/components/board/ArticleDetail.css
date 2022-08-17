@@ -10,7 +10,7 @@
 .header-detail{
     display: flex;
     justify-content: space-around;
-    width:250px;
+    width:300px;
 }
 .button-container{
     display: flex;
@@ -41,6 +41,7 @@
     display:flex;
     justify-content: space-between;
     border-bottom:1px solid rgba(0,0,0,0.25);
+    border-top:1px solid rgba(0,0,0,0.25);
     min-height: 80px;
     margin-bottom:15px;
 }
@@ -53,14 +54,37 @@
 }
 .comment-edit{
     text-align: right;
-    margin-bottom: 10px;
+    
     cursor:pointer;
+    
 }
 .recomment{
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #dddddd;
+    
     margin-left:40px;
     margin-bottom: 15px;
     
+}
+.comment-control{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:140px;
+    margin : 5px 0px 5px 0px;
+}
+.recomment-control{
+    display:flex;
+    justify-content: space-between;
+    width:140px;
+}
+.like-button{
+    background-color: #dddddd;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
 }
