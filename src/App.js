@@ -19,7 +19,7 @@ import SignOut from './components/user/SignOut.js'
 import Cosmetic from './cosmetics/cosmetic'
 import UserInfo from './components/user/UserInfo'
 import UserInfoUpdate from './components/user/UserInfoUpdate.js'
-import './App.css'
+//import './App.css'
 
 import { useDispatch } from 'react-redux'
 
@@ -42,14 +42,9 @@ function App() {
  
   return (
     <div className="App">
-<<<<<<< HEAD
-      <Header></Header>
-      
-      <Suspense fallback={<Loading />}>
-=======
+      <Suspense fallback={<Loading />}/>
+
       <Header value={userID} ></Header>
-    
->>>>>>> 693960f16b2a36bb9cc3f08166d6ee2e75e7bf3c
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/signup" element={<SignUp></SignUp>}></Route>
