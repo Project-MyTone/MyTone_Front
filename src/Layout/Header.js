@@ -3,8 +3,10 @@ import {Container, Nav, Navbar, Button, ButtonGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import SignOut from '../components/user/SignOut';
 
-function Header(props) {
+function Header() {
     let navigate = useNavigate();
+    const userID = localStorage.getItem('UserID');
+
     return(
         <>
             <div className="Title">
@@ -16,7 +18,7 @@ function Header(props) {
                         <>
                             <SignOut></SignOut>
                             <Button style={{backgroundColor: "transparent", border:"none", color:"#CD5C5C"}} 
-                                onClick={()=>{navigate(`/userInfo/${props.value}`)}}>USER INFO</Button>
+                                onClick={()=>{navigate(`/userInfo/${userID}`)}}>USER INFO</Button>
                         </>
                         :
                         <>

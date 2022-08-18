@@ -16,7 +16,7 @@ function UserInfoUpdate() {
                 setUserInfo(result.data);
             })
     },[]);
-
+      
     return (
         <div className="userInfoUpdate_BG">
             <form action="/"
@@ -24,7 +24,7 @@ function UserInfoUpdate() {
                     e.preventDefault();
                     axios.patch(`/user/${userID.id}/`, {
                         nickname: e.target.nickname.value,
-                        gender: e.target.gender.value=='femail'?'W':'M'
+                        gender: e.target.gender.value=="female"?"F":"M"
                     }).then((res) => {
                         if (res.status == 200) { // 수정 성공
                             alert('수정 완료!!');
@@ -48,7 +48,7 @@ function UserInfoUpdate() {
                         <td>성별</td>
                         <td style={{display:'flex',justifyContent:'space-evenly', marginTop:"15px"}}>
                             <div><input type='radio' name='gender' value='female'/>여성</div>
-                            <div><input type='radio' name='gender' value='male'/>남성</div>
+                            <div><input type='radio' name='gender' value='male' />남성</div>
                         </td>
                     </tr>
                 </table>

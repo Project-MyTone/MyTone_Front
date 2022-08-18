@@ -13,7 +13,7 @@ import { setAuthToken } from '../../store';
 import { Button } from 'react-bootstrap'
 import './SignIn.css'
 
-function SignIn(props) {
+function SignIn() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -34,7 +34,8 @@ function SignIn(props) {
                         .then((res)=>{
                             if(res.status==200){
                                 alert(res.data.message)
-                                props.change_ID(res.data.token.user);
+                                localStorage.setItem('UserID',res.data.token.user);
+                                //props.change_ID(res.data.token.user);
                                 setRefreshToken(res.data.token.refresh_token);
                                 dispatch(setAuthToken(res.data.token.access_token));
                                 navigate('/');

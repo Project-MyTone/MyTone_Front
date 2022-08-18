@@ -5,6 +5,10 @@
     background-position: center;
     filter: grayscale(20%);
 }
+
+.MainSubImg{
+    width: 500px;
+}
   
 .MainText{
     text-align: center;
@@ -67,7 +71,7 @@
 ul.service_list_container{
     list-style: none;
     position: relative;
-    top: 200px;
+    top: 150px;
 }
 
 li.list_item{
@@ -75,4 +79,9 @@ li.list_item{
     margin-left: 65px;
     margin-right: 65px;
     text-align: center;
+}
+
+.sub_icon{
+    width: 60px;
+    margin-bottom: 35px;
 }

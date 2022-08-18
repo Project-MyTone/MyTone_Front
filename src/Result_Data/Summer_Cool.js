@@ -14,7 +14,8 @@ function Summer_Cool(){
                 <h4 className="title">테스트 결과는 <h2 className="result_title">여름 쿨(Summer Cool)</h2> 입니다.</h4>
                 <img src={summer_Img} className="summer_Img"></img>
                 <div>
-                    <Button className="share_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}>공유하기</Button>
+                    <Button className="share_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}
+                    onClick={()=>{navigate('/post')}}>공유하기</Button>
                     <Button className="cosmetic_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}
                     onClick={()=>{navigate(`/cosmetic/${colorID}`)}}>화장품 추천</Button>
                 </div>

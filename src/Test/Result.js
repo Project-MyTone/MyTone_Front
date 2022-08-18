@@ -14,7 +14,7 @@ function Result() {
     else if(PersonalColor == '여름쿨톤(summer)'){
         return <Summer_Cool></Summer_Cool>
     }
-    else if(PersonalColor == '가을웜톤(autumn)'){
+    else if(PersonalColor == '가을웜톤(fall)'){
         return <Autumn_Warm></Autumn_Warm>
     }
     else if(PersonalColor == '겨울쿨톤(winter)'){

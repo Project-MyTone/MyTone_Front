@@ -41,13 +41,13 @@ function App() {
  
   return (
     <div className="App">
-      <Header value={userID}></Header>
+      <Header></Header>
       
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/signup" element={<SignUp></SignUp>}></Route>
-          <Route path="/signin" element={<SignIn change_ID={SetUserID}></SignIn>}></Route>
+          <Route path="/signin" element={<SignIn></SignIn>}></Route>
 
           
           <Route path="/board" element={<ArticleCategory category={category} setCategory={setCategory} setSearchToggle={setSearchToggle} />}> {/*nested route 사용*/}
