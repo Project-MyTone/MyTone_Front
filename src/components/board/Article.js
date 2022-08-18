@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { Button, InputGroup, Form } from 'react-bootstrap'
+import { Button, InputGroup, Form, Spinner } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
@@ -17,39 +17,44 @@ function Article(props) {
     let [articleCount, setArticleCount] = useState(0);
     let [searchTitle, setSearchTitle] = useState('');
     let [searchedState,setSearchedState] = useState([]);
-    
+    let [loading,setLoading] = useState(false);
+
     useEffect(() => {
-       
+        setLoading(true);
         axios.get('/article')
             .then((res) => {
                 //console.log('article가져오는 코드')
                 dispatch(addArticle(res.data.results))
                 setArticleCount(res.data.count)
-                
+                setLoading(false);
                 setFindedState(res.data.results);
             })
             .catch((err)=>{
+                
                 console.log(err)
             })
         return () => {
             //console.log('article클리어 하는 코드')
             dispatch(clearArticle())
         }
-
     }, [])
 
     useEffect(()=>{
+        
         if (props.category == 0 ) { // category가 every(0)인 경우 
             setFindedState(state.article);
+            console.log('카테고리가 0일때 setFindedState')
+            
         }
         else {
             setFindedState(state.article.filter((e) => e.board == props.category))
-        }
-        
-    },[props.category,props.searchToggle]) // 게시판 검색에 따른 재랜더링을 위해 검색state를 추가
+            console.log('카테고리가 0이 아닐 때 setFindedState')
+            
+        }   
+    },[props.category,props.searchToggle,state.article]) // 게시판 검색에 따른 재랜더링을 위해 검색state를 추가
     
     
-
+    
 
 
     function formatDate(date) {
@@ -123,9 +128,16 @@ function Article(props) {
 
             </div>
             {
+                loading==true?
+                <div style={{minHeight:'46vh',display:'flex',justifyContent:'center',alignItems:'center'}}>
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+                </div>
+                :
                 findedState.length == 0 && props.searchToggle==false // 게시판 검색을 하지 않았을 경우
                     ?
-                    <div style={{ minHeight: '230px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>게시글이 없습니다😥</div>
+                    <div style={{ minHeight: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>게시글이 없습니다😥</div>
                     :
                     props.searchToggle==false // 게시판 검색을 하지 않았을 경우
                     ?
@@ -151,7 +163,9 @@ function Article(props) {
                         }
                     </div>
                     :''
+                
             }
+            
             {
                 searchedState.length == 0 && props.searchToggle //게시판 검색을 했을 경우
                 ?

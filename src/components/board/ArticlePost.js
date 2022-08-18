@@ -36,8 +36,8 @@ function ArticlePost() {
                     <Form.Control  type="text"  value={title} onChange={(e)=>{setTitle(e.target.value)}} />
                 </Form.Group>
 
-                <Dropdown style={{marginTop:'15px'}}>
-                    <Dropdown.Toggle variant="primary" id='dropdown-basic'>
+                <Dropdown style={{marginTop:'15px'}} >
+                    <Dropdown.Toggle variant="light" id='dropdown-basic'>
                         {
                         category=='1'
                         ?'여름 쿨톤'
@@ -49,7 +49,7 @@ function ArticlePost() {
                         }
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
+                    <Dropdown.Menu >
                         
                         <Dropdown.Item onClick={()=>{setCategory(1)}}>여름 쿨톤</Dropdown.Item>
                         <Dropdown.Item onClick={()=>{setCategory(2)}}>겨울 쿨톤</Dropdown.Item>
@@ -69,7 +69,8 @@ function ArticlePost() {
             <form style={{marginBottom:'15px'}}>
                 <input type='file' accept="img/*" multiple onChange={onLoadFile}></input>
             </form>
-            <Button variant="primary" onClick={() => {
+            <Button style={{backgroundColor: "#CD5C5C", color:"white", 
+                        marginTop:"25px", border:"none", marginBottom:"30px"}} onClick={() => {
                 const formdata = new FormData();
                 
                 if(image!=undefined && image.length>0){
@@ -111,6 +112,7 @@ function ArticlePost() {
                         removeRefreshToken();
                         dispatch(deleteAuthToken());
                         alert('로그인이 만료되었습니다. 다시 로그인 해주세요')
+                        // localStorage.removeItem('userId')
                         navigate('/signin')
                         window.location.reload()
                     }

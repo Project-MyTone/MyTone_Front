@@ -59,6 +59,9 @@ function Comment(props) {
 	let [editCommentId, setEditCommentId] = useState();
 	let [edittingComment, setEdittingComment] = useState('')
 
+	let [editReClicked,setEditReClicked] = useState(false);
+	let [editReCommentId,setEditReCommentId] = useState();
+	let [edittingReComment,setEdittingReComment] = useState('');
 
 	let [recommentClicked, setRecommentClicked] = useState(false);
 	let [recommentId, setRecommentId] = useState();
@@ -108,7 +111,37 @@ function Comment(props) {
 			window.location.reload()
 		}
 	}
-	
+	function editReComment() {
+		if (props.accessToken != null) {
+			axios.defaults.headers.common['Authorization'] = `Bearer ${props.accessToken}`
+
+			axios.patch(`/comment/recomment/${editReCommentId}/`, {
+				body: edittingReComment,
+
+			})
+				.then((res) => {
+					console.log(res)
+					if (res.status == 200) {
+						alert('수정완료')
+						setEditReClicked(false)
+						window.location.reload()
+					}
+				})
+				.catch((err) => {
+					//alert(err.response.data.detail)
+
+					//console.log(err.response.status)
+					if (err.response.status == 403) {
+						alert('본인의 댓글만 수정 가능합니다')
+						window.location.reload()
+					}
+
+				})
+		} else {
+			alert('로그인 후 수정할 수 있습니다')
+			window.location.reload()
+		}
+	}
 	return (
 		<div className='comment-top'>
 			<h4>댓글</h4>
@@ -178,35 +211,54 @@ function Comment(props) {
 								props.recommentList.filter((e) => e.comment == a.id).map((a, i) => {
 									return (
 										<div key={i} className='recomment'>
-											<p>↳ {a.body}</p>
-											<div className='recomment-control'>
-												<p>작성자 : {a.user}</p>
-												<Button style={{ padding: '0', height: '26px', width: '26px' }} variant="light" onClick={() => {
-													axios.defaults.headers.common['Authorization'] = `Bearer ${props.accessToken}`
-													axios.delete(`/comment/recomment/${a.id}/`)
-														.then((res) => {
-															if (res.status == 204) {
-																alert('댓글이 삭제되었습니다.')
-																window.location.reload();
-															}
+											{
+												editReClicked == true && editReCommentId == a.id
+													?
+													<textarea style={{ width: '100%', wordBreak: 'break-all' }} value={edittingReComment} onChange={(e) => { setEdittingReComment(e.target.value) }}></textarea>
+													:
+													<p>↳ {a.body}</p>
 
-														})
-														.catch((err) => {
-															if (err.response.status == 403) {
-																alert('본인의 댓글만 삭제 할 수 있습니다!')
-															}
-															else if (err.response.status == 401) {
-																alert('권한이 없습니다!')
-																window.location.reload();
-															}
-														})
-											}}>X</Button>
+											}
+											
+											<div>
+												<div className='recomment-control'>
+													<p>작성자 : {a.user}</p>
+													<Button style={{ padding: '0', height: '26px', width: '26px' }} variant="light" onClick={() => {
+														axios.defaults.headers.common['Authorization'] = `Bearer ${props.accessToken}`
+														axios.delete(`/comment/recomment/${a.id}/`)
+															.then((res) => {
+																if (res.status == 204) {
+																	alert('댓글이 삭제되었습니다.')
+																	window.location.reload();
+																}
+
+															})
+															.catch((err) => {
+																if (err.response.status == 403) {
+																	alert('본인의 댓글만 삭제 할 수 있습니다!')
+																}
+																else if (err.response.status == 401) {
+																	alert('권한이 없습니다!')
+																	window.location.reload();
+																}
+															})
+												}}>X</Button>
+												</div>
+												{
+													editReClicked == true && editReCommentId == a.id
+													?
+													<div style={{cursor:'pointer'}}onClick={editReComment}>수정완료</div>
+													:
+													<div  style={{cursor:'pointer'}}onClick={() => { setEditReClicked(true); setEditReCommentId(a.id); setEdittingReComment(a.body) }}>수정</div>
+												}
+												
 											</div>
 										</div>
 									)
 								})
 
 							}
+							{console.log(props.recommentList)}
 							
 							{
 								recommentClicked == true && recommentId == a.id
@@ -273,6 +325,17 @@ function ArticleDetail(props) { //게시판 상세 페이지
 	let [image, setImage] = useState([]);
 
 	const accessToken = localStorage.getItem('accessToken');
+	
+	let [fade,setFade] = useState('');
+	// useEffect(()=>{
+	// 	let a = setTimeout(()=>{setFade('end')},100)
+
+	// 	return()=>{
+	// 		clearTimeout(a)
+	// 		setFade('')
+	// 	}
+	// },[id])
+
 	useEffect(() => {
 		axios.get(`/article/${id}`)
 			.then((res) => {
@@ -344,7 +407,7 @@ function ArticleDetail(props) { //게시판 상세 페이지
 	return (
 		<>
 
-			<div className='detail-top'>
+			<div className={`detail-top`}>
 				<div className='detail-header'>
 					<div style={{ fontWeight: 'bold', fontSize: 'larger' }}>{title}</div>
 					<div className="header-detail">
@@ -396,7 +459,7 @@ function ArticleDetail(props) { //게시판 상세 페이지
 				</div>
 				<hr></hr>
 				<div style={{ display: 'flex', justifyContent: 'center' }}>
-					<Button variant="light" onClick={() => { navigate('/board/list'); props.setCategory(0) }}>목록</Button>
+					<Button variant="light" onClick={() => { navigate('/board/list'); props.setCategory(0); props.setSearchToggle(false) }}>목록</Button>
 				</div>
 				<Comment id={id} accessToken={accessToken} recommentList={props.recommentList}></Comment>
 

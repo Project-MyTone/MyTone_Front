@@ -44,8 +44,8 @@ function ArticleCategory(props) {
 	return (
 		<div>
 			<Offcanvas style={{ width: '15vw', minWidth: 'fit-content' }} show={show} onHide={handleClose} scroll={true} backdrop={false}>
-				<Offcanvas.Header closeButton>
-					<Offcanvas.Title>카테고리</Offcanvas.Title>
+				<Offcanvas.Header closeButton style={{backgroundColor:'rgb(205, 92, 92)',color:'white',height:'70px'}}>
+					<Offcanvas.Title>Category</Offcanvas.Title>
 				</Offcanvas.Header>
 
 				<Offcanvas.Body className='category-top'>
@@ -53,7 +53,7 @@ function ArticleCategory(props) {
 					{
 						state.articleCategory.map((a, i) => {
 							return (
-								<div className="category-list" onClick={() => { props.setCategory(a.id);props.setSearchToggle(false); navigate('/board/list') }} key={i}>{a.name}</div>
+								<div className="category-list" onClick={() => {  navigate('/board/list'); props.setCategory(a.id);props.setSearchToggle(false);}} key={i}>{a.name}</div>
 							)
 						})
 					}
@@ -70,7 +70,7 @@ function ArticleCategory(props) {
 				</button>
 			</div>
 
-			<Outlet></Outlet>
+			<Outlet  ></Outlet>
 
 		</div>
 	)
