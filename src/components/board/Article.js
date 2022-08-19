@@ -143,9 +143,9 @@ function Article(props) {
                 :
                 findedState.length == 0 && props.searchToggle==false // 게시판 검색을 하지 않았을 경우
                     ?
-                    <Alert variant='warning' className={`start ${fade}`} style={{ minHeight: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div className={`start ${fade}`} style={{ minHeight: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         게시글이 없습니다😥
-                    </Alert>
+                    </div>
                     :
                     props.searchToggle==false // 게시판 검색을 하지 않았을 경우
                     ?
@@ -177,9 +177,9 @@ function Article(props) {
             {
                 searchedState.length == 0 && props.searchToggle //게시판 검색을 했을 경우
                 ?
-                <Alert variant='warning' className={`start ${fade}`} style={{ minHeight: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className={`start ${fade}`} style={{ minHeight: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     게시글이 없습니다😥
-                </Alert>
+                </div>
                 :
                 props.searchToggle //게시판 검색을 했을 경우
                 ?
