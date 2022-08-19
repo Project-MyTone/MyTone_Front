@@ -10,7 +10,7 @@ function Header() {
     return(
         <>
             <div className="Title">
-                <div className="ProjectName" style={{display:"inline"}}>myTone</div>
+                <div className="ProjectName" style={{display:"inline",cursor:'pointer'}} onClick={()=>{navigate('/')}}>myTone</div>
                 <ButtonGroup className="LogMenu" size="sm">
                     {
                         localStorage.getItem('accessToken')!=null
@@ -29,7 +29,7 @@ function Header() {
                     
                 </ButtonGroup>
             </div>
-            <Navbar bg="light" variant="light">
+            <Navbar style={{paddingLeft:'15vw'}}bg="light" variant="light">
                 <Container>
                 <Nav className="me-auto">
                     <Nav.Link onClick={()=>{navigate('/')}}>홈</Nav.Link>
