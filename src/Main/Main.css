@@ -65,14 +65,14 @@
 .service_list_BG{
     height: 500px;
     text-align: center;
-    padding-left: 130px;
-    padding-right: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 ul.service_list_container{
     list-style: none;
-    position: relative;
-    top: 150px;
 }
 
 li.list_item{
