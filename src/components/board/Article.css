@@ -31,15 +31,17 @@
 .article-header > p{
     opacity: 0.5;
     margin:0;
+    transition: all 0.3s ease-out;
 }
 .article-header > p:hover{
     opacity: 1;
 }
-.article-body{
-    padding-bottom: 15px;
-    opacity: 0.6;
-    cursor:pointer;
+
+
+.start{
+    opacity : 0;
 }
-.article-body:hover{
+.end{
     opacity: 1;
+    transition: opacity 0.5s;
 }

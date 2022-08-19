@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { Button, InputGroup, Form, Spinner } from 'react-bootstrap'
+import { Button, InputGroup, Form, Spinner,Alert } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
@@ -18,6 +18,7 @@ function Article(props) {
     let [searchTitle, setSearchTitle] = useState('');
     let [searchedState,setSearchedState] = useState([]);
     let [loading,setLoading] = useState(false);
+    let [fade,setFade] = useState('');
 
     useEffect(() => {
         setLoading(true);
@@ -43,19 +44,24 @@ function Article(props) {
         
         if (props.category == 0 ) { // category가 every(0)인 경우 
             setFindedState(state.article);
-            console.log('카테고리가 0일때 setFindedState')
+            
             
         }
         else {
             setFindedState(state.article.filter((e) => e.board == props.category))
-            console.log('카테고리가 0이 아닐 때 setFindedState')
             
         }   
     },[props.category,props.searchToggle,state.article]) // 게시판 검색에 따른 재랜더링을 위해 검색state를 추가
     
     
-    
+    useEffect(()=>{
+        let a = setTimeout(()=>{setFade('end')},10)
 
+        return()=>{
+            clearTimeout(a)
+            setFade('')
+        }
+    },[props.category,searchedState])
 
     function formatDate(date) {
         var d = new Date(date),
@@ -86,7 +92,7 @@ function Article(props) {
     return (
 
         <div className='article-top'>
-            <h2 style={{ marginBottom: '100px' }}>
+            <h2 style={{ marginBottom: '20px' }}>
                 {
                     props.category == 0 && props.searchToggle==false
                         ? '전체'
@@ -137,11 +143,13 @@ function Article(props) {
                 :
                 findedState.length == 0 && props.searchToggle==false // 게시판 검색을 하지 않았을 경우
                     ?
-                    <div style={{ minHeight: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>게시글이 없습니다😥</div>
+                    <Alert variant='warning' className={`start ${fade}`} style={{ minHeight: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        게시글이 없습니다😥
+                    </Alert>
                     :
                     props.searchToggle==false // 게시판 검색을 하지 않았을 경우
                     ?
-                    <div style={{ minWidth: '535px' }}>
+                    <div className={`start ${fade}`} style={{ minWidth: '535px' }} >
                         {
                             findedState.map((a, i) => {
                                 return (
@@ -169,11 +177,13 @@ function Article(props) {
             {
                 searchedState.length == 0 && props.searchToggle //게시판 검색을 했을 경우
                 ?
-                <div style={{ minHeight: '230px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>게시글이 없습니다😥</div>
+                <Alert variant='warning' className={`start ${fade}`} style={{ minHeight: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    게시글이 없습니다😥
+                </Alert>
                 :
                 props.searchToggle //게시판 검색을 했을 경우
                 ?
-                <div style={{ minWidth: '535px' }}>
+                <div className={`start ${fade}`} style={{ minWidth: '535px' }}>
                         {
                             searchedState.map((a, i) => {
                                 return (
@@ -182,7 +192,7 @@ function Article(props) {
                                             navigate('/board/detail/' + a.id)
                                         }
                                         }>
-                                            <p style={{ fontWeight: 'bold' }}>제목 : {a.title}</p>
+                                            <p style={{ fontWeight: 'bold',fontSize:'larger' }}>제목 : {a.title}</p>
                                             <div>
                                                 <div>작성일자 : {formatDate(a.created_at)}</div>
                                                 <div>작성자 : {a.user}</div>
