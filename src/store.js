@@ -8,8 +8,8 @@ let articleCategory = createSlice({
         addArticleCategory(state,action){
             if(state.length==0)
                 state.push(...action.payload);
-            else
-                console.log('already category exist')
+            // else
+            //     console.log('already category exist')
         }
     }
 })
