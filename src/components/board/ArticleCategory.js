@@ -14,7 +14,7 @@ function ArticleCategory(props) {
 	let dispatch = useDispatch()
 	const handleClose = () => setShow(false); // 상단 x버튼으로 카테고리 닫기
 	const toggleShow = () => setShow((s) => !s); // 화살표 버튼으로 togle
-
+	
 	
 
 	useEffect(() => {
@@ -49,11 +49,13 @@ function ArticleCategory(props) {
 				</Offcanvas.Header>
 
 				<Offcanvas.Body className='category-top'>
-					<div className="category-list" onClick={() => { props.setCategory(0); props.setSearchToggle(false); navigate('/board/list') }} >전체</div> 
+					<div className="category-list" onClick={() => { props.setCategory(0); props.setSearchToggle(false); navigate('/board/list') }} >
+						전체
+					</div> 
 					{
 						state.articleCategory.map((a, i) => {
 							return (
-								<div className="category-list" onClick={() => {  navigate('/board/list'); props.setCategory(a.id);props.setSearchToggle(false);}} key={i}>{a.name}</div>
+								<div className='category-list'  onClick={() => {  navigate('/board/list'); props.setCategory(a.id);props.setSearchToggle(false);}} key={i}>{a.name}</div>
 							)
 						})
 					}
