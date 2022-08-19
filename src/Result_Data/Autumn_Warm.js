@@ -11,7 +11,7 @@ function Autumn_Warm(){
     return(
         <>
             <div className="autumn_title_BG">
-                <h4 className="title">테스트 결과는 <h2 className="result_title">가을 웜(Autumn Warm)</h2> 입니다.</h4>
+                <h4 className="title">테스트 결과는 <div className="result_title">가을 웜(Autumn Warm)</div> 입니다.</h4>
                 <img src={autumn_Img} className="autumn_Img"></img>
                 <div>
                     <Button className="share_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}

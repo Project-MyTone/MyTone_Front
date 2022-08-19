@@ -11,7 +11,7 @@ function Spring_Warm(){
     return(
         <>
             <div className="spring_title_BG">
-                <h4 className="title">테스트 결과는 <h2 className="result_title">봄 웜(Spring Warm)</h2> 입니다.</h4>
+                <h4 className="title">테스트 결과는 <div className="result_title">봄 웜(Spring Warm)</div> 입니다.</h4>
                 <img src={spring_Img} className="spring_Img"></img>
                 <div>
                     <Button className="share_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}

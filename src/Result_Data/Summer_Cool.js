@@ -11,7 +11,7 @@ function Summer_Cool(){
     return(
         <>
             <div className="summer_title_BG">
-                <h4 className="title">테스트 결과는 <h2 className="result_title">여름 쿨(Summer Cool)</h2> 입니다.</h4>
+                <h4 className="title">테스트 결과는 <div className="result_title">여름 쿨(Summer Cool)</div> 입니다.</h4>
                 <img src={summer_Img} className="summer_Img"></img>
                 <div>
                     <Button className="share_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}

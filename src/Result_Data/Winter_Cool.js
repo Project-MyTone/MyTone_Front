@@ -11,7 +11,7 @@ function Winter_Cool(){
     return(
         <>
             <div className="winter_title_BG">
-                <h4 className="title">테스트 결과는 <h2 className="result_title">겨울 쿨(Winter Cool)</h2> 입니다.</h4>
+                <h4 className="title">테스트 결과는 <div className="result_title">겨울 쿨(Winter Cool)</div> 입니다.</h4>
                 <img src={winter_Img} className="winter_Img"></img>
                 <div>
                     <Button className="share_btn" style={{backgroundColor: "#CD5C5C", border:"none"}}
