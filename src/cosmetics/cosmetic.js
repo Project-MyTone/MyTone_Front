@@ -9,12 +9,12 @@ function Cosmetic() {
     //const List = items.results.filter(result => result.color == colorid);
     let accessToken=localStorage.getItem('accessToken');
     let [List, setList] = useState();
-
+    
     useEffect(() => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
         axios.get('/color/' + colorid + '/cosmetic/')
             .then((res)=>{
-                setList(res.results);
+                setList(res.data.results);
             })
     },[]);
 
