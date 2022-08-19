@@ -6,7 +6,17 @@ import {useState, useEffect} from 'react'
 
 function Cosmetic() {
     let {colorid} = useParams();
-    const List = items.results.filter(result => result.color == colorid);
+    //const List = items.results.filter(result => result.color == colorid);
+    let accessToken=localStorage.getItem('accessToken');
+    let [List, setList] = useState();
+
+    useEffect(() => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
+        axios.get('/color/' + colorid + '/cosmetic/')
+            .then((res)=>{
+                setList(res.results);
+            })
+    },[]);
 
     return(
         <>
