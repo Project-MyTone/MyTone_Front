@@ -11,11 +11,11 @@
 .header-detail{
     display: flex;
     justify-content: space-around;
-    width:300px;
+    width:380px;
 }
 .button-container{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 .button-container Button{
