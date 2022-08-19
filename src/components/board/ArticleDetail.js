@@ -324,7 +324,8 @@ function ArticleDetail(props) { //게시판 상세 페이지
 	let [articleId, setArticle] = useState(0);
 	let [user, setUser] = useState('');
 	let [image, setImage] = useState([]);
-
+	let [likeCount,setLikeCount] = useState(0);
+	let [hits,setHits] = useState(0);
 	const accessToken = localStorage.getItem('accessToken');
 	
 	let [fade,setFade] = useState('');
@@ -345,8 +346,9 @@ function ArticleDetail(props) { //게시판 상세 페이지
 					if (res.data.images.length != 0) {
 						setImage(res.data.images)
 					}
-					
-					setArticle(res.data.id)
+					setHits(res.data.hits);
+					setLikeCount(res.data.article_like_user);
+					setArticle(res.data.id);
 					setTitle(res.data.title);
 					setContent(res.data.content);
 					setCreateAt(formatDate(res.data.created_at));
@@ -418,7 +420,8 @@ function ArticleDetail(props) { //게시판 상세 페이지
 							.then((res)=>{
 								
 								if(res.status==200){
-									alert('좋아요!')
+									alert('❤')
+									window.location.reload();
 								}
 							})
 							.catch((err)=>{
@@ -432,14 +435,18 @@ function ArticleDetail(props) { //게시판 상세 페이지
 								}
 							})
 						}}>❤</div>
+						<div>좋아요 : {likeCount}</div>
 						<div>작성일자 : {createAt}</div>
 						<div>{user}</div>
 					</div>
 				</div>
 				<hr></hr>
 				<div className='button-container'>
-					<Button variant="light" onClick={checkAuth}>수정</Button>
-					<Button variant="danger" onClick={deleteArticle}>삭제</Button>
+					<div>조회수 : {hits}</div>
+					<div style={{display:'flex'}}>
+						<Button variant="light" onClick={checkAuth}>수정</Button>
+						<Button variant="danger" onClick={deleteArticle}>삭제</Button>
+					</div>
 				</div>
 				<div>
 					{
@@ -450,7 +457,7 @@ function ArticleDetail(props) { //게시판 상세 페이지
 
 									image.map(function (a, i) {
 										return (
-											<img key={i} src={a.image}></img>
+											<img style={{marginBottom:'10px'}} key={i} src={a.image}></img>
 										)
 									})
 								}
