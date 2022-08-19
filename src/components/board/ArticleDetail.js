@@ -120,7 +120,7 @@ function Comment(props) {
 
 			})
 				.then((res) => {
-					console.log(res)
+					
 					if (res.status == 200) {
 						alert('수정완료')
 						setEditReClicked(false)
@@ -258,7 +258,7 @@ function Comment(props) {
 								})
 
 							}
-							{console.log(props.recommentList)}
+							
 							
 							{
 								recommentClicked == true && recommentId == a.id
@@ -316,6 +316,7 @@ function Comment(props) {
 }
 function ArticleDetail(props) { //게시판 상세 페이지
 	let navigate = useNavigate();
+	let dispatch = useDispatch();
 	let { id } = useParams();
 	let [title, setTitle] = useState('');
 	let [content, setContent] = useState('');
@@ -415,7 +416,7 @@ function ArticleDetail(props) { //게시판 상세 페이지
 							axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
 							axios.post(`/article/${articleId}/like`)
 							.then((res)=>{
-								console.log(res)
+								
 								if(res.status==200){
 									alert('좋아요!')
 								}
@@ -423,8 +424,11 @@ function ArticleDetail(props) { //게시판 상세 페이지
 							.catch((err)=>{
 								console.log(err)
 								if(err.response.status==401){
-									alert('로그인 후 좋아요 버튼을 누를 수 있습니다')
+									alert('로그인을 해주세요')
+									removeRefreshToken();
+									dispatch(deleteAuthToken());
 									window.location.reload();
+									
 								}
 							})
 						}}>❤</div>
