@@ -13,11 +13,12 @@ function Main() {
     return(
         <>
             <div>
-                <img src={MainImg} className="MainImg"/>
-                <div className="MainText">Personal Color Test</div>
-                <Button className="TestBtn" style={{backgroundColor: "#CD5C5C", border:"none"}}
-                    onClick={()=>{navigate('/image')}}
-                >GO TEST</Button>
+                <div className="MainImg" style={{backgroundImage: `url(${MainImg})`}}>
+                    <div className="MainText">Personal Color Test</div>
+                    <Button className="TestBtn" style={{backgroundColor: "#CD5C5C", border:"none"}}
+                        onClick={()=>{navigate('/image')}}
+                    >GO TEST</Button>
+                </div>
             </div>
             <div className="SupportInfoBG">
                 <div className="SupportInfoTop">
